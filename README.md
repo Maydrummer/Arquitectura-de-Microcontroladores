@@ -1,2 +1,5 @@
 # Preguntas orientadoras
 ## 1.- Describa brevemente los diferentes perfiles de familias de microprocesadores/microcontroladores de ARM. Explique alguna de sus diferencias características. 
+- **Cortex M3/M4:** Estos procesadores estan basados en la arquitectura ARMv7-M. Ambos procesadores son de alto rendimiento diseñados para microcontroladres. Son de 32 bits, con un set de instrucciones RISC. El pipeline es de 3 etapas y la memoria del sistema usa 32 bits para su direccionamiento, lo que permite 4GB de espacio en direcciones. Utiliza instrucciones Thumb y Thumb2.
+- **Cortex M0/M0+:** Estos procesadores estan basados en la arquitectura ARMv6-M, el cual tiene un set corto de instrucciones. Utiliza una arquitectura de 32 bits, tiene una alta eficiencia energetica, lo que lo hace adecuado para aplicaciones de bajo consumo de energia. Otra caracteristica, es que utilizan una arquitectura de datos de Von Neumann.
+- **Cortex M1:** Se basan en la arquitectura ARMv6-M , esta disenado especificamente para aplicaciones de FPGA.
