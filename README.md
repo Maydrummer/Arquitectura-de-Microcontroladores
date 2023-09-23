@@ -49,3 +49,11 @@ ADD R3, R1, R2            ; Sumar R1 y R2 y almacenar el resultado en R3
 STR R3, [dirección]       ; Almacenar el resultado en la dirección
 ~~~
 
+## 4.- ¿Cómo es el mapa de memoria de la familia?
+El espacio de direcciones de 4 GB de los procesadores Cortex M está dividido en varias regiones de memoria.
+- Accesos a código de programa (por ejemplo, región CODE)
+- Accesos a datos (por ejemplo, región SRAM)
+- Periféricos (por ejemplo, región de periféricos)
+- Control interno del procesador y componentes de depuración (por ejemplo, Private Peripheral Bus)
+La arquitectura también permite una alta flexibilidad para que las regiones de memoria se utilicen para otros propósitos. Por ejemplo, los programas pueden ejecutarse tanto desde la región de CÓDIGO como desde la de RAM (SRAM), y un microcontrolador también puede integrar bloques de SRAM en la región de CÓDIGO.
+![Memory Map](./figures/memorymap.png)
