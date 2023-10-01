@@ -33,6 +33,8 @@ El porque permite la mayor densidad de codigo se debe a:
 - Las instrucciones Thumb son más cortas en longitud que las instrucciones ARM de 32 bits, lo que reduce la cantidad de memoria necesaria para almacenar el código. Cada instrucción Thumb es de 16 bits en longitud, mientras que las instrucciones ARM son de 32 bits.
 - La estructura compacta de las instrucciones Thumb permite empaquetar más instrucciones en la misma cantidad de memoria.
 
+![Comparisson between classic intructions and Thumb-2](./figures/thumb-2%20instructions.png)
+
 ## 3.- ¿Qué entiende por arquitectura load-store? ¿Qué tipo de instrucciones no posee este tipo de arquitectura?
 Esto significa que los datos deben cargarse desde la memoria, procesarse y escribirse de nuevo en la memoria mediante una seria de instrucciones. Por ejemplo, si deseamos incrementar un valor de datos almacenado en la SRAM el procedimiento es el siguiente:
 - Procesador necesita una instruccion para leer los datos de la SRAM y colocarlos en los registros de proposito general del procesador.

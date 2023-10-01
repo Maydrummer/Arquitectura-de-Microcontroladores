@@ -1,0 +1,78 @@
+.syntax unified
+.thumb
+.text
+
+@ Simbolos exportados --> No olvidar de colocar los nombres de las funciones aquí
+.global asm_svc
+.global asm_sum
+.global asm_productoescalar_32
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@ Prototipo en "C":
+@   void asm_svc (void)
+@
+.thumb_func
+    asm_svc:
+        svc 0
+        bx lr
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@ Prototipo en "C":
+@   uint32_t asmSum (uint32_t firstOperand, uint32_t secondOperand)
+@
+@ Parametros recibidos:
+@   r0: firstOperand
+@   r1: secondOperand
+@
+@ Valor de retorno:
+@   r0: resultado de la suma de firstOperand y secondOperand
+@
+.thumb_func
+    asm_sum:
+        add r0, r1  @ r0 = r0 + r1
+        bx lr       @ vuelve adonde fue llamada (especificamente, si "pc"
+                    @ es la direccion, en el codigo del programa, de la
+                    @ instruccion "bl asm_sum" usada para saltar a
+                    @ esta funcion, entonces "lr" contiene ese "pc" + 4).
+                    @ el valor de retorno debe quedar en el registro r0.
+                    @ En este caso, r0 es el resultado de r0 + r1.
+
+        @ Otras alternativas para el retorno
+        @ mov pc,lr
+        @ bx lr
+        @ push {lr} ... pop {pc}
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@ Prototipo en "C":
+@   void productoEscalar32(uint32_t * vectorIn, uint32_t * vectorOut ,uint32_t longitud, uint32_t escalar)
+@
+@ Parametros recibidos:
+@   r0: direccion de memoria vectorIn
+@   r1: direccion de memoria vectorOut
+@   r2: longitud
+@   r3: escalar
+@ Valor de retorno:
+@   NULL, solo se modifica el vectorOUT
+@
+.thumb_func
+    asm_productoescalar_32:
+    //Guardas de seguridad, compara con cero los parametros de la funcion, si es asi, se sale de la funcion
+    	cbz r0, exit_productoescalar_32
+    	cbz r1, exit_productoescalar_32
+    	cbz r2, exit_productoescalar_32
+    	cbz r3, exit_productoescalar_32
+
+    	push {r4}
+    	loop_productoescalar_32:
+    		subs r2, #1 //Decremento en uno el contador y actualiza la bandera Z
+    		ldr r4,[r0,r2,LSL #2] // Guardo la direccion de memoria del elemento actual en R4, R2 sera el elemento que itera
+    							  // y se decrementa en uno, pero el LSL #2 es un shift left de 2 bits, que provoca una
+    							  // multiplicacion por 4, de esta manera nos aseguramos que se itere cada 4 bytes en forma
+    							  // decreciente ; R4=*(r0+(r2*4))
+    		mul r4, r4, r3        // r4= r4*r3, se multiplica por el escalar el valor del vector actual
+    		str r4,[r1,r2,LSL #2] // Almacenamos el valor en el vector de out
+
+    		bne loop_productoescalar_32 //Saltamos al loop de producto escalar siempre y cuando r2 no resulto en cero
+    	pop {r4}
+    	exit_productoescalar_32:
+        bx lr
