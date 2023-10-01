@@ -24,6 +24,19 @@
 - **Cortex M3:** Utiliza una arquitectura de datos de Harvard modificado, donde las instrucciones y los datos están en memorias separadas, pero comparten el mismo espacio de direcciones. Basado en la arquitectura ARMv7-M. Utiliza principalmente el conjunto de instrucciones Thumb-2, que incluye instrucciones de 16 y 32 bits, lo que mejora la densidad de código y el rendimiento. No tiene soporte para instrucciones de punto flotante en la configuración base, pero puede incluir una FPU en implementaciones opcionales.
 - **Cortex M4:** Al igual que el Cortex-M3, utiliza una arquitectura de datos de Harvard modificado. Basado en la arquitectura ARMv7-M. Utiliza principalmente el conjunto de instrucciones Thumb-2, con extensiones DSP (procesamiento de señales digitales) y SIMD (NEON) para mejoras de rendimiento. Incluye instrucciones de punto flotante en Thumb-2 y puede incluir una unidad de punto flotante (FPU) en implementaciones opcionales para operaciones de punto flotante más rápidas.
 
+### Caracteristicas adicionales de los Cortex M3 y M4
+
+Desde un punto de vista de alto nivel, Cortex M3 y M4 son muy similares entre sí. Aunque hay diferencias significativas en los diseños de la ruta de datos internas, algunas partes de los procesadores, como el búfer de obtención de instrucciones
+decodificación y ejecución de instrucciones, y el NVIC son similares entre sí.
+Además, los componentes fuera del nivel del "núcleo" son casi idénticos.
+A continuación, se presenta un diagrama de bloques generalizado de los cortex M3 y M4.
+
+![ Block Diagram Cortex M3 M4 ](./figures/Block%20Diagram%20Cortex%20M3_M4.png)
+
+El nivel superior de procesadores Cortex M3/M4 tiene varias interfaces de bus que se describen en la siguiente tabla.
+
+![ Bus interfaces ](./figures/bus%20interfaces.png)
+
 ## 2.- ¿Por qué se dice que el set de instrucciones Thumb permite mayor densidad de código? Explique
 Los procesadores cortex M3 y M4 cuentan con la tecnologia THUMB-2 la cual permite mezclar instrucciones de 16 y 32 bits.
 El porque permite la mayor densidad de codigo se debe a:
@@ -59,3 +72,32 @@ El espacio de direcciones de 4 GB de los procesadores Cortex M está dividido en
 - Control interno del procesador y componentes de depuración (por ejemplo, Private Peripheral Bus)
 La arquitectura también permite una alta flexibilidad para que las regiones de memoria se utilicen para otros propósitos. Por ejemplo, los programas pueden ejecutarse tanto desde la región de CÓDIGO como desde la de RAM (SRAM), y un microcontrolador también puede integrar bloques de SRAM en la región de CÓDIGO.
 ![Memory Map](./figures/memorymap.png)
+
+## 6.- Describa los diferentes modos de privilegio y operación del Cortex M, sus relaciones y como se conmuta de uno al otro. Describa un ejemplo en el que se pasa del modo privilegiado a no priviligiado y nuevamente a privilegiado.
+
+Los procesadores Cortex-M3 y Cortex-M4 disponen de punteros apilados en bancos:
+- El kernel del SO y las interrupciones: Utiliza el Main Stack Pointer (MSP)
+- Tareas de aplicación: Se utiliza el puntero de pila de procesos (PSP). 
+
+De este modo, la pila utilizada por el kernel del SO puede separarse de la que utilizan las tareas de aplicación, lo que mejora la fiabilidad así como permitir un uso óptimo del espacio de pila. 
+ **Para aplicaciones sencillas sin SO, el MSP se puede utilizar todo el tiempo.**
+
+Para mejorar aún más la confiabilidad del sistema, el cortex M3 y M4 admiten la separación de modos de operación privilegiados y no privilegiados. De forma predeterminada, los procesadores se inician en modo privilegiado.
+
+Cuando se utiliza un sistema operativo y se ejecutan tareas de usuario, la ejecución de las tareas de usuario se puede llevar a cabo en modo no privilegiado para que se puedan aplicar ciertas restricciones, como bloquear el acceso a agunos registros NVIC. 
+
+La separación de modos de operación también se puede utilizar con la MPU para evitar que tareas sin privilegios accedan a ciertas regiones de la memoria. De esta manera, una tarea de usuario no pueda dañar los datos utilizados por el Kernel del sistema operativo u otras tareas, mejorando asi la estabilidad del sistema.
+
+### Modos de privilegios, operación y estados.
+
+- **Estados de operación:**
+    - **Thumb State:** Cuando el procesador está ejecutando código de programa.
+    - **Debug State:** Cuando el procesador está detenido o no ejecuta instrucciones debido al depurador o breakpoints
+- **Modos de operación:** 
+    - **Handler Mode:** Al ejecutar un controlador de excepciones como una rutina de servicio de interrupción (ISR). En modo Handler, el procesador tiene un nivel de acceso privilegiado.
+    - **Thread Mode:** Al ejecutar un código de aplicación normal, en este modo, el procesador puede estar en un nivel de acceso privilegiado como no privilegiado. Esto se controla por un registro especial denonimado *CONTROL*.
+- **Nivel de acceso:**
+    - **Privilegiado:** El procesador tiene acceso a todos los recursos. 
+    - **No privilegiado:** Algunas regiones de memoria son inaccesibles para el procesador y algunas operaciones no pueden ser usadas.
+
+    
