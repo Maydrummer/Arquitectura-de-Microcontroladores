@@ -73,6 +73,12 @@ El espacio de direcciones de 4 GB de los procesadores Cortex M está dividido en
 La arquitectura también permite una alta flexibilidad para que las regiones de memoria se utilicen para otros propósitos. Por ejemplo, los programas pueden ejecutarse tanto desde la región de CÓDIGO como desde la de RAM (SRAM), y un microcontrolador también puede integrar bloques de SRAM en la región de CÓDIGO.
 ![Memory Map](./figures/memorymap.png)
 
+## 5.- ¿Qué ventajas presenta el uso de los “shadowed pointers” del PSP y el MSP?
+En el contexto de los microcontroladores Cortex-M4, los "shadowed pointers" se refieren a la técnica de utilizar dos punteros, el Process Stack Pointer (PSP) y el Main Stack Pointer (MSP), para administrar y trabajar con las pilas en un entorno multitarea. Estos punteros permiten cambiar eficientemente entre el contexto de ejecución principal y los contextos de ejecución de procesos o tareas. A continuación, se mencionan algunas ventajas de utilizar los "shadowed pointers" PSP y MSP en un Cortex-M4:
+- **Gestión eficiente de la memoria:** El uso de dos punteros de pila (PSP y MSP) permite una administración eficiente de la memoria al separar la pila principal (MSP) utilizada por el sistema y la pila de procesos (PSP) utilizada por las tareas.
+- **Soporte para multitarea:** Los "shadowed pointers" facilitan la conmutación entre tareas o procesos en un sistema multitarea. Cada tarea puede tener su propia pila asociada (utilizando el PSP) mientras que el sistema y las interrupciones se gestionan utilizando la pila principal (MSP).
+- **Cambios de contexto rápidos:** Al usar PSP y MSP, es posible cambiar de una tarea a otra de manera rápida y eficiente, ya que solo es necesario cambiar el puntero de la pila (PSP) en lugar de modificar la pila real.
+
 ## 6.- Describa los diferentes modos de privilegio y operación del Cortex M, sus relaciones y como se conmuta de uno al otro. Describa un ejemplo en el que se pasa del modo privilegiado a no priviligiado y nuevamente a privilegiado.
 
 Los procesadores Cortex-M3 y Cortex-M4 disponen de punteros apilados en bancos:
@@ -84,7 +90,7 @@ De este modo, la pila utilizada por el kernel del SO puede separarse de la que u
 
 Para mejorar aún más la confiabilidad del sistema, el cortex M3 y M4 admiten la separación de modos de operación privilegiados y no privilegiados. De forma predeterminada, los procesadores se inician en modo privilegiado.
 
-Cuando se utiliza un sistema operativo y se ejecutan tareas de usuario, la ejecución de las tareas de usuario se puede llevar a cabo en modo no privilegiado para que se puedan aplicar ciertas restricciones, como bloquear el acceso a agunos registros NVIC. 
+Cuando se utiliza un sistema operativo y se ejecutan tareas de usuario, la ejecución de las tareas de usuario se puede llevar a cabo en modo no privilegiado para que se puedan aplicar ciertas restricciones, como bloquear el acceso a algunos registros NVIC. 
 
 La separación de modos de operación también se puede utilizar con la MPU para evitar que tareas sin privilegios accedan a ciertas regiones de la memoria. De esta manera, una tarea de usuario no pueda dañar los datos utilizados por el Kernel del sistema operativo u otras tareas, mejorando asi la estabilidad del sistema.
 
@@ -100,4 +106,8 @@ La separación de modos de operación también se puede utilizar con la MPU para
     - **Privilegiado:** El procesador tiene acceso a todos los recursos. 
     - **No privilegiado:** Algunas regiones de memoria son inaccesibles para el procesador y algunas operaciones no pueden ser usadas.
 
-    
+ En la siguiente figura podemos observar que en *Thread Mode* podemos cambiar de modo privilegiado a no privilegiado. Sin embargo no es posible hacer lo contrario, para esto, se necesita usar un mecanismo que permita saltar a una excepción, el cual será manejado por el *Handler Mode*. De esta forma podemos tener cualquier nivel de acceso.
+
+![Operation states and modes](./figures/operationstates_modes.png)
+
+**Ejemplo**: Un sistema embebido puede contener un kernel de sistema operativo integrado que se ejecuta con un nivel de acceso privilegiado y tareas de aplicación que se ejecutan en no privilegiado. De esta forma, si una tarea falla, las tareas restantes y el kernel de la aplicación aun pueden continuar ejecutándose normalmente, protegiendo así zonas de memoria y periféricos. 
