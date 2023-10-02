@@ -111,3 +111,82 @@ La separación de modos de operación también se puede utilizar con la MPU para
 ![Operation states and modes](./figures/operationstates_modes.png)
 
 **Ejemplo**: Un sistema embebido puede contener un kernel de sistema operativo integrado que se ejecuta con un nivel de acceso privilegiado y tareas de aplicación que se ejecutan en no privilegiado. De esta forma, si una tarea falla, las tareas restantes y el kernel de la aplicación aun pueden continuar ejecutándose normalmente, protegiendo así zonas de memoria y periféricos. 
+
+## 7.- ¿Qué se entiende por modelo de registros ortogonal? Dé un ejemplo
+
+El término "modelo de registros ortogonal" en el contexto de los microcontroladores Cortex-M4 se refiere a la característica de la arquitectura donde los registros tienen un propósito específico y bien definido, lo que significa que cada registro tiene una función clara y no se superponen en su uso o función.
+
+En el caso del Cortex-M4, el diseño de la arquitectura de registros es altamente eficiente y se busca minimizar la redundancia o superposición de funciones entre los registros. Por ejemplo, se pueden tener registros específicos para propósitos generales, registros de estado, registros de control y registros especializados para ciertas operaciones. Esto permite un uso más eficiente y organizado de los registros en la ejecución de instrucciones y operaciones del procesador.
+
+Un ejemplo de modelo de registros ortogonal en el Cortex-M4 es el uso de registros específicos para operaciones aritméticas, como la multiplicación y la división. Por ejemplo, los registros R0 y R1 pueden utilizarse para almacenar operandos, mientras que los registros R2 y R3 pueden usarse para almacenar los resultados de operaciones aritméticas. Esto proporciona un diseño claro y específico para las operaciones matemáticas, separando claramente los registros involucrados en estas operaciones de otros registros que pueden tener diferentes propósitos.
+
+Por lo tanto, en resumen, el modelo de registros ortogonal en el Cortex-M4 se refiere a un diseño donde cada registro tiene un propósito específico y claro, evitando la superposición de funciones y permitiendo un uso eficiente y organizado de los registros en el procesador.
+
+## 8.- ¿Qué ventajas presenta el uso de intrucciones de ejecución condicional (IT)? Dé un ejemplo
+
+## 9.- Describa brevemente las excepciones más prioritarias (reset, NMI, Hardfault).
+
+- **Reset:** 
+   - Prioridad máxima: Es la excepción más prioritaria y se produce al encender o reiniciar el microcontrolador.
+    - Función: Inicializa el sistema, establece valores predeterminados para registros, inicializa la memoria y pone en marcha el programa principal.
+
+- **NMI (Non-Maskable Interrupt):**
+
+    - Prioridad alta: Es una excepción no enmascarable que tiene una prioridad alta, no puede ser deshabilitada y siempre es atendida.
+    - Función: Utilizada para eventos críticos y de alta prioridad que deben ser atendidos de inmediato, incluso si otras interrupciones están deshabilitadas.
+
+- **Hard Fault:**
+
+    - Prioridad alta: Es una excepción de alta prioridad, aunque su prioridad exacta puede variar según la configuración específica.
+    - Función: Ocurre cuando se detecta un error grave o una condición inesperada durante la ejecución, como un acceso indebido a memoria o una instrucción no válida.
+
+Estas excepciones son críticas para garantizar la estabilidad y la integridad del sistema. El reset inicializa el sistema, la NMI maneja eventos cruciales que deben atenderse en cualquier situación y el hard fault atiende condiciones inesperadas que podrían llevar a un comportamiento inadecuado o a un bloqueo del sistema. Es fundamental comprender y manejar estas excepciones de manera adecuada en el diseño y la programación de sistemas basados en Cortex-M4.
+
+## 10.- Describa las funciones principales de la pila. ¿Cómo resuelve la arquitectura el llamado a funciones y su retorno?
+
+### Stack Memory
+El *stack* es un mecanismo de uso de memoria que permite que una porcion de la memoria se utilice como buffer del almacenamiento de datos donde el ultimo dato en entrar es el primero en salir (LIFO).
+
+ARM utiliza la memoria principal del sistema para operaciones del *stack de memoria*. Tiene instrucciones **PUSH** para almacenar datos en la pila y la instruccion **POP** para recuperar los datos de la pila. Es importante tener en cuenta que el *Stack Pointer* que se esta utilizando es automaticamente ajustado por cada instruccion **PUSH** y **POP**.
+
+La pila o *stack* puede ser usado para:
+
+- Almacenamiento temporal de datos originales cuando una funcion en ejecucion necesita utilizar registros del banco de registros para el procesamiento de datos.
+- Los valores se pueden restaurar al final de la funcion para que el programa que llamo a la funcion no pierda los datos.
+- Pasar informacion a rutinas y subrutinas.
+- Para almacenamiento de variables locales.
+- Para mantener los valores de estado y registros del procesador en el caso de excepciones como una interrupcion. 
+
+Cuando se inicia el procesador, el *STACK POINTER* (SP) se configura al final del espacio de memoria reservado para el *stack memory*. 
+
+- Por cada *PUSH*, el procesador primero decrementa el SP, luego almacena el valor en la ubicacion de memoria referenciado por el SP.
+- Durante las operaciones, el SP apunta a la ubicacion de la memoria donde se enviaron los ultimos datos a la pila.
+- En una operacion *POP*, el valor de la ubicacion de memoria apuntado por SP es leido y luego, el valor del SP incrementa automaticamente. 
+
+![Stack PUSH and POP](./figures/stackPushPop.png)
+
+Los usos mas comunes de la instrucciones *Push* y *Pop* son para guardar el contenido del banco de registros cuando una funcion o subrutina es llamada. Al inicio de la llamada, el contenido de algunos registros pueden ser guardados en el *stack* usando un *PUSH*, y luego puede ser restaurado a su valor original, cuando se complete la funcion o subrutina, utilizando un *POP*.
+
+A continuacion se dara un ejemplo, donde se ejecuta una funcion denominada *Funcion 1* llamada desde el programa principal.
+
+![ Simple push and pop usage in functions](./figures/simple%20push%20pop.png)
+
+- La funcion 1 va a necesitar usar y modificar los registros R4, R5 y R6 para el procesamiento de datos, y estos registros contienen valores que el programa principal necesitara mas adelante. Estos deben ser almacenados en el *Stack* usando un *PUSH* y luego ser restaurados usando un *POP* al final de la funcion 1.
+
+- De esta forma, el codigo del programa que llama a la funcion no va a perder ningun dato y podra continuar con una ejecucion normal. 
+
+- Es importante notar que cada instruccion *PUSH* tiene su instruccion *POP*.
+
+
+## 11.- Describa la secuencia de reset del microprocesador.
+
+Despues del reset y antes que el procesador inicie la ejecucion del programa, el procesador lee las primeras dos palabras desde la memoria. 
+
+El comienzo del espacio de memoria contiene la tabla de vectores y las dos primeras palabras de la tabla de vectores son el valor inicial del MSP y el vector de reinicio, que es la direccion inicial del controlador de reinicio. Despues de que el procesador lee estas dos palabras, el procesador configura el MSP y el contador de programa con estos valores.
+
+La configuración del MSP es necesaria porque algunas excepciones, como el manejador de NMI (interrupción no enmascarable) o el manejador de HardFault (fallo grave), podrían ocurrir potencialmente poco después del reinicio, y la memoria de pila y, por lo tanto, el MSP, serán necesarios para empujar parte del estado del procesador a la pila antes de manejar la excepción. 
+
+![Reset Sequence](./figures/reset%20sequence.png)
+
+## 18.- ¿Qué funciones cumple la unidad de protección de memoria (MPU)?
+Es una unidad programable la cual define permisos de acceso para varias regiones de memoria. En los Cortex M3 y M4 admite 8 regiones programables y pueden utilizarse con un sistema operativo integrado para proporcionar un sistema robusto.
