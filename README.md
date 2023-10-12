@@ -114,15 +114,42 @@ La separación de modos de operación también se puede utilizar con la MPU para
 
 ## 7.- ¿Qué se entiende por modelo de registros ortogonal? Dé un ejemplo
 
-El término "modelo de registros ortogonal" en el contexto de los microcontroladores Cortex-M4 se refiere a la característica de la arquitectura donde los registros tienen un propósito específico y bien definido, lo que significa que cada registro tiene una función clara y no se superponen en su uso o función.
+El término "modelo ortogonal" en el contexto del registro de control (Control Register) en sistemas embebidos se refiere a la capacidad de modificar ciertos bits de control de forma independiente y sin afectar otros bits. En este caso, se mencionan dos bits llamados SPSEL y nPRIV, los cuales tienen una relación ortogonal.
 
-En el caso del Cortex-M4, el diseño de la arquitectura de registros es altamente eficiente y se busca minimizar la redundancia o superposición de funciones entre los registros. Por ejemplo, se pueden tener registros específicos para propósitos generales, registros de estado, registros de control y registros especializados para ciertas operaciones. Esto permite un uso más eficiente y organizado de los registros en la ejecución de instrucciones y operaciones del procesador.
+SPSEL (Stack Pointer Select) y nPRIV (Non-secure privilege level) son bits que se utilizan en arquitecturas como ARM Cortex-M para controlar aspectos relacionados con el manejo de la pila y los niveles de privilegio. Estos bits tienen ciertas combinaciones que se pueden configurar, y la configuración de estos bits afecta el comportamiento y los privilegios del sistema.
 
-Un ejemplo de modelo de registros ortogonal en el Cortex-M4 es el uso de registros específicos para operaciones aritméticas, como la multiplicación y la división. Por ejemplo, los registros R0 y R1 pueden utilizarse para almacenar operandos, mientras que los registros R2 y R3 pueden usarse para almacenar los resultados de operaciones aritméticas. Esto proporciona un diseño claro y específico para las operaciones matemáticas, separando claramente los registros involucrados en estas operaciones de otros registros que pueden tener diferentes propósitos.
+El término "ortogonal" implica que la configuración de un bit (por ejemplo, SPSEL) no afecta la configuración o el funcionamiento del otro bit (nPRIV), y viceversa. Por lo tanto, se pueden utilizar tres de las cuatro combinaciones posibles de estos bits de manera independiente y sin interferir entre sí.
 
-Por lo tanto, en resumen, el modelo de registros ortogonal en el Cortex-M4 se refiere a un diseño donde cada registro tiene un propósito específico y claro, evitando la superposición de funciones y permitiendo un uso eficiente y organizado de los registros en el procesador.
+## 8.- ¿Qué ventajas presenta el uso de instrucciones de ejecución condicional (IT)? Dé un ejemplo
 
-## 8.- ¿Qué ventajas presenta el uso de intrucciones de ejecución condicional (IT)? Dé un ejemplo
+Las instrucciones de ejecución condicional (IT, por sus siglas en inglés: If-Then) son una característica clave de la arquitectura ARM Cortex-M que permite ejecutar una o más instrucciones condicionalmente, dependiendo del estado de una bandera de condición previamente evaluada. Esto proporciona una forma eficiente de escribir código más compacto y optimizado, ya que permite ejecutar instrucciones solo cuando se cumple una determinada condición.
+
+**Ventajas del uso de instrucciones de ejecución condicional (IT):**
+
+- **Ahorro de Código:** Permite escribir menos código al condicionar la ejecución de instrucciones, evitando la duplicación de bloques de código.
+
+- **Optimización de Rendimiento:** Al ejecutar instrucciones condicionalmente, se evitan saltos incondicionales, lo que puede mejorar la eficiencia y el rendimiento del código.
+
+- **Reducción de la Complexidad:** Simplifica el control de flujo en comparación con la necesidad de utilizar múltiples instrucciones de salto condicional o bloques de código separados.
+
+- **Mayor Legibilidad:** Ayuda a que el código sea más legible y conciso al indicar claramente qué instrucciones están condicionadas.
+
+**Ejemplo de Instrucciones de Ejecución Condicional (IT):**
+
+Supongamos que queremos ejecutar una instrucción solo si una condición es verdadera (por ejemplo, la bandera Z indica que el resultado es cero). Usaremos la siguiente notación:
+
+- **IT{cond}** Instrucción1
+- Instrucción2
+
+Donde "cond" es la condición bajo la cual se ejecutará la Instrucción1.
+
+Ejemplo de código en ensamblador (pseudo código):
+
+~~~
+CMP r0, #0       ; Comparar r0 con 0
+IT NE             ; Ejecutar instrucción siguiente si no es igual (Not Equal)
+SUBNE r1, r2, r3  ; Restar r3 de r2 y almacenar en r1 si no es igual
+~~~
 
 ## 9.- Describa brevemente las excepciones más prioritarias (reset, NMI, Hardfault).
 
@@ -188,5 +215,142 @@ La configuración del MSP es necesaria porque algunas excepciones, como el manej
 
 ![Reset Sequence](./figures/reset%20sequence.png)
 
+## 12.- ¿Qué entiende por “core peripherals”? ¿Qué diferencia existe entre estos y el resto de los periféricos?
+
+En el contexto de los microcontroladores Cortex-M4 de ARM, "core peripherals" se refiere a componentes periféricos esenciales e integrados directamente en la unidad central de procesamiento (CPU) del microcontrolador Cortex-M4. Estos periféricos son esenciales para el funcionamiento básico del procesador y suelen incluir elementos como temporizadores (timers), controladores de interrupciones, unidades de manejo de memoria, registros de control y más.
+
+A diferencia de otros periféricos externos que se pueden conectar al microcontrolador a través de buses o puertos específicos, los core peripherals están integrados directamente en el núcleo del procesador. Esto significa que están altamente optimizados para el rendimiento y la eficiencia y tienen acceso directo y rápido a la CPU sin pasar por buses externos.
+
+Algunos ejemplos comunes de core peripherals en un microcontrolador Cortex-M4 pueden incluir:
+
+- Nested Vectored Interrupt Controller (NVIC): Controla las interrupciones y su prioridad.
+
+- SysTick Timer: Un temporizador utilizado para generar interrupciones periódicas.
+
+- System Control Block (SCB): Proporciona acceso a funciones de control de la unidad central de procesamiento (CPU) y la administración del sistema.
+
+- MPU (Memory Protection Unit): Permite la configuración de áreas de memoria protegidas y permisos de acceso.
+
+Estos core peripherals son esenciales para el funcionamiento del microcontrolador y suelen estar diseñados para tener un acceso eficiente y de baja latencia por parte de la CPU. Por otro lado, los periféricos externos pueden ser módulos adicionales conectados al microcontrolador para proporcionar funcionalidades específicas según las necesidades del proyecto. Estos periféricos externos pueden incluir cosas como módulos de comunicación (UART, SPI, I2C), convertidores analógico-digitales (ADC), puertos de entrada/salida (GPIO) y otros dispositivos específicos de aplicación.
+
+## 13.- ¿Cómo se implementan las prioridades de las interrupciones? Dé un ejemplo
+
+En un microcontrolador Cortex-M4, las prioridades de las interrupciones se gestionan mediante el Nested Vectored Interrupt Controller (NVIC), que es un componente vital para el manejo de interrupciones. El NVIC asigna un nivel de prioridad a cada interrupción y determina cuál debe ejecutarse cuando varias interrupciones están pendientes simultáneamente.
+
+El NVIC organiza las interrupciones en niveles de prioridad, donde el nivel más bajo tiene la prioridad más alta y el nivel más alto tiene la prioridad más baja. Las interrupciones con mayor prioridad se atienden antes que las de menor prioridad.
+
+Aquí hay un ejemplo simplificado de cómo se podrían implementar las prioridades de interrupción en un microcontrolador Cortex-M4:
+
+Supongamos que tenemos tres interrupciones con prioridades diferentes:
+
+- Interrupción de alta prioridad (por ejemplo, una interrupción de temporizador crítico)
+- Interrupción de prioridad media (por ejemplo, una interrupción de comunicación)
+- Interrupción de baja prioridad (por ejemplo, una interrupción de entrada/salida)
+Vamos a asignarles prioridades utilizando números más bajos para indicar mayor prioridad:
+
+La interrupción de alta prioridad tiene la prioridad más alta y se le asigna el nivel de prioridad 0.
+La interrupción de prioridad media tiene una prioridad intermedia y se le asigna el nivel de prioridad 1.
+La interrupción de baja prioridad tiene la prioridad más baja y se le asigna el nivel de prioridad 2.
+Ejemplo de configuración en código (esto puede variar según el entorno de desarrollo y el microcontrolador específico):
+
+~~~
+// Definición de las prioridades de interrupción (usando valores arbitrarios)
+#define HIGH_PRIORITY 0
+#define MEDIUM_PRIORITY 1
+#define LOW_PRIORITY 2
+
+// Configuración de las prioridades de interrupción
+NVIC_SetPriority(TIMER_INTERRUPT, HIGH_PRIORITY); // Interrupción de alta prioridad
+NVIC_SetPriority(COMMUNICATION_INTERRUPT, MEDIUM_PRIORITY); // Interrupción de prioridad media
+NVIC_SetPriority(IO_INTERRUPT, LOW_PRIORITY); // Interrupción de baja prioridad
+~~~
+
+En este ejemplo, NVIC_SetPriority es una función que establece la prioridad de una interrupción específica en el NVIC. Cada interrupción se configura con su nivel de prioridad correspondiente según la importancia que tenga para el sistema.
+
+## 14.- ¿Qué es el CMSIS? ¿Qué función cumple? ¿Quién lo provee? ¿Qué ventajas aporta?
+
+CMSIS (Cortex Microcontroller Software Interface Standard) es un estándar desarrollado por ARM para facilitar el desarrollo de software para microcontroladores basados en sus arquitecturas Cortex-M. En particular, para el Cortex-M4, CMSIS proporciona una interfaz de software estandarizada que incluye bibliotecas, definiciones de registros, y utilidades que permiten a los desarrolladores escribir código más portable y eficiente para estos microcontroladores.
+
+A continuación, se describen sus principales características y funciones:
+
+Interfaz Estándar: CMSIS proporciona una interfaz de programación estándar para los microcontroladores Cortex-M4, lo que permite a los desarrolladores escribir código que sea compatible con una amplia gama de dispositivos basados en esta arquitectura.
+
+Definiciones de Registros: CMSIS define estructuras y macros que permiten acceder a los registros de manera más sencilla y consistente, facilitando la programación de periféricos y la configuración de los microcontroladores.
+
+Bibliotecas y Funciones Optimizadas: CMSIS incluye bibliotecas y funciones optimizadas para operaciones comunes, como operaciones matemáticas y de señal, lo que ayuda a mejorar la eficiencia y el rendimiento del código.
+
+Funciones de Inicialización: CMSIS proporciona funciones de inicialización para configurar adecuadamente el sistema y los periféricos del microcontrolador, lo que simplifica el proceso de inicio del desarrollo de software.
+
+Manejo de Interrupciones: CMSIS incluye mecanismos para facilitar el manejo de interrupciones y excepciones, permitiendo una gestión eficaz de eventos y tareas críticas en tiempo real.
+
+Soporte para Depuración: CMSIS incluye definiciones y funciones que ayudan a facilitar la depuración del código, lo que es esencial para identificar y solucionar problemas durante el desarrollo.
+
+CMSIS es proporcionado por ARM, la empresa que desarrolla las arquitecturas Cortex-M. Está diseñado para ser utilizado con herramientas de desarrollo estándar de la industria, como Keil MDK (Microcontroller Development Kit) y otras herramientas de desarrollo compatibles con ARM.
+
+Las ventajas de utilizar CMSIS incluyen la mejora de la portabilidad del código, la optimización del rendimiento, el acceso eficiente a los periféricos y la simplificación del desarrollo de software para microcontroladores Cortex-M4 y otras arquitecturas Cortex-M. Esto a su vez acelera el tiempo de desarrollo y mejora la calidad y eficiencia del código producido para estos dispositivos.
+
+## 15.- Cuando ocurre una interrupción, asumiendo que está habilitada ¿Cómo opera el microprocesador para atender a la subrutina correspondiente? Explique con un ejemplo.
+
+Cuando ocurre una interrupción en un microprocesador Cortex-M4 y está habilitada, el procesador suspende la ejecución de la tarea actual y pasa a ejecutar una rutina de servicio de interrupción (ISR) específica asociada a la interrupción que se ha producido. Esto permite responder rápidamente a eventos externos o internos importantes sin perder datos o generar retrasos significativos en el procesamiento.
+
+A continuación, describiré cómo opera el microprocesador Cortex-M4 para atender una interrupción con un ejemplo:
+
+Ejemplo de Interrupción (IRQ) y Manejo en un Cortex-M4:
+
+Supongamos que hay una interrupción externa generada por un periférico, como un temporizador (Timer). Cuando el temporizador alcanza cierto valor, genera una solicitud de interrupción (IRQ).
+
+1. **Generación de la Interrupción:**
+
+    - El temporizador alcanza el valor específico, lo que genera la solicitud de interrupción (IRQ).
+
+2. **Detección y Priorización:**
+
+    - El controlador de interrupciones del Cortex-M4 detecta la solicitud de interrupción y verifica su prioridad en relación con otras interrupciones en curso.
+
+3. **Guardado del Estado Actual:**
+
+    - Se guarda el estado actual del procesador, incluyendo el contenido del Program Counter (PC) y registros relevantes, en la pila actual (que puede ser la Main Stack o la Process Stack, dependiendo de la configuración).
+
+4. **Cambio al Contexto de la Interrupción:**
+
+    - El procesador cambia al modo Handler (si no estaba en ese modo) y carga el Program Counter (PC) con la dirección de inicio de la rutina de servicio de interrupción (ISR) asociada a la interrupción.
+
+5. **Ejecución de la ISR:**
+
+    - Se ejecuta la rutina de servicio de interrupción (ISR) específica asociada a la interrupción generada (esta ISR fue previamente definida por el programador).
+    - La ISR maneja la interrupción, realiza las acciones necesarias (por ejemplo, actualización de variables, reconfiguración de periféricos, etc.), y puede llamar a otras funciones o subrutinas según sea necesario.
+
+6. **Finalización de la ISR:**
+
+    - Al finalizar la ISR, se restaura el estado previo guardado de la pila, incluyendo el Program Counter (PC) y otros registros relevantes.
+
+7. **Retorno al Contexto Anterior:**
+
+    - El procesador vuelve al contexto anterior (estado antes de la interrupción) y reanuda la ejecución de la tarea que se estaba realizando antes de la interrupción.
+
+Este proceso garantiza que el microprocesador pueda manejar múltiples interrupciones y responder a ellas de manera eficiente y rápida, priorizando según las configuraciones de prioridad de interrupción establecidas en el sistema. Cada interrupción tiene su propia ISR asociada para manejarla de manera adecuada.
+
+Es importante recordar que la gestión de interrupciones puede variar según el microcontrolador específico y la configuración del sistema, pero el concepto básico de cómo se manejan las interrupciones en un procesador Cortex-M4 sigue siendo el mismo.
+
+## 16.- ¿Cómo cambia la operación de stacking al utilizar la unidad de punto flotante?
+
+Al usar la unidad de punto flotante el stacking va a involucrar mas registros, R0-R15 y se suman S0-S15 incluyendo el registro FPSCR.
+
+## 17.- Explique las características avanzadas de atención a interrupciones: tail chaining y late arrival.
+
+**Tail Chaining (Encadenamiento de Cola):**
+
+Tail Chaining es una característica que permite que múltiples interrupciones se procesen de manera secuencial sin tener que volver al bucle principal del programa entre cada interrupción. Cuando una interrupción se está manejando y finaliza, el procesador verifica si hay otras interrupciones pendientes con una prioridad igual o mayor a la que acaba de finalizar. Si las hay, el procesador pasa directamente al manejador de la siguiente interrupción sin regresar al bucle principal, lo que reduce la latencia y mejora la eficiencia en el manejo de múltiples interrupciones.
+
+![Tail Chaining](./figures/tale.png)
+
+**Late arrival:**
+
+Cuando se produce una excepción, el procesador acepta la solicitud de excepción y comienza la operación de apilamiento. Si durante esta operación de apilamiento ocurre otra excepción de mayor prioridad, se atenderá primero la excepción de llegada tardía de mayor prioridad.
+Por ejemplo, si la Excepción #1 (de menor prioridad) ocurre unos ciclos antes que la Excepción #2 (de mayor prioridad), el procesador se comportará como se muestra en la Figura de abajo, de modo que el Controlador #2 se ejecutará tan pronto como se complete el apilamiento.
+
+![Late arrival](./figures/late.png)
+
+
 ## 18.- ¿Qué funciones cumple la unidad de protección de memoria (MPU)?
-Es una unidad programable la cual define permisos de acceso para varias regiones de memoria. En los Cortex M3 y M4 admite 8 regiones programables y pueden utilizarse con un sistema operativo integrado para proporcionar un sistema robusto.
+Permite controlar y restringir el acceso a regiones específicas de memoria en un sistema embebido. Su función principal es garantizar la seguridad y protección de las áreas de memoria, lo que contribuye a la seguridad del sistema y ayuda a prevenir accesos no autorizados o errores de software.

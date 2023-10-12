@@ -1,0 +1,8 @@
+../Core/Src/main.c:71:5:main	1
+../Core/Src/main.c:138:6:SystemClock_Config	3
+../Core/Src/main.c:186:13:MX_USART2_UART_Init	2
+../Core/Src/main.c:219:13:MX_GPIO_Init	1
+../Core/Src/main.c:252:6:productoEscalar32	2
+../Core/Src/main.c:263:6:generaVector	2
+../Core/Src/main.c:271:6:eco_vector	3
+../Core/Src/main.c:289:6:Error_Handler	1
