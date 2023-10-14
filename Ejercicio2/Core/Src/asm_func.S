@@ -7,6 +7,11 @@
 .global asm_sum
 .global asm_zeros
 .global asm_productoescalar32
+.global asm_productoEscalar16
+.global asm_productoEscalar12
+.global asm_pack32to16
+.global asm_prom
+.global asm_promSIMD
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @ Prototipo en "C":
 @   void asm_svc (void)
@@ -101,3 +106,156 @@
     	pop {r4}
     	exit_productoescalar32:
         bx lr
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@                                EJERCICIO 3
+@ void asm_productoEscalar16 (uint16_t * vectorIn, uint16_t * vectorOut, uint32_t longitud, uint16_t escalar);
+@ Parametros recibidos:
+@   r0: direccion de memoria vectorIn
+@   r1: direccion de memoria vectorOut
+@   r2: longitud
+@   r3: escalar
+@ Valor de retorno:
+@   NULL, solo se modifica el vectorOUT
+@
+.thumb_func
+    asm_productoEscalar16:
+    	push {r4}
+    	loop3:
+    		subs r2, #1 //Decremento en uno el contador y actualiza la bandera Z, este es nuestro indice
+    		ldrh r4,[r0,r2,LSL #1] // Guardo la direccion de memoria del elemento actual en R4, R2 sera el elemento que itera
+    							  // y se decrementa en uno, pero el LSL #2 es un shift left de 2 bits, que provoca una
+    							  // multiplicacion por 4, de esta manera nos aseguramos que se itere cada 4 bytes en forma
+    							  // decreciente ; R4=*(r0+(r2*2)) ya que son 2 bytes por dato de 16bits
+    		mul r4, r4, r3        // r4= r4*r3, se multiplica por el escalar el valor del vector actual
+    		strh r4,[r1,r2,LSL #1] // Almacenamos el valor en el vector de out
+
+    		bne loop3 //Saltamos al loop de producto escalar siempre y cuando r2 no resulto en cero
+    	pop {r4}
+    	exit3:
+        	bx lr
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@                                EJERCICIO 4
+@ void asm_productoEscalar12 (uint16_t * vectorIn, uint16_t * vectorOut, uint32_t longitud, uint16_t escalar);
+@ Parametros recibidos:
+@   r0: direccion de memoria vectorIn
+@   r1: direccion de memoria vectorOut
+@   r2: longitud
+@   r3: escalar
+@ Valor de retorno:
+@   NULL, solo se modifica el vectorOUT
+@
+.thumb_func
+    asm_productoEscalar12:
+    	push {r4}
+    	loop4:
+    		subs r2, #1 //Decremento en uno el contador y actualiza la bandera Z, este es nuestro indice
+    		ldrh r4,[r0,r2,LSL #1] // Guardo la direccion de memoria del elemento actual en R4, R2 sera el elemento que itera
+    							  // y se decrementa en uno, pero el LSL #2 es un shift left de 2 bits, que provoca una
+    							  // multiplicacion por 4, de esta manera nos aseguramos que se itere cada 4 bytes en forma
+    							  // decreciente ; R4=*(r0+(r2*2)) ya que son 2 bytes por dato de 16bits
+    		mul r4, r4, r3        // r4= r4*r3, se multiplica por el escalar el valor del vector actual
+    		usat r4, #12, r4     //Saturamos el resultado a un valor maximo de 4095 que sale del [(2^12bits)-1]
+    		strh r4,[r1,r2,LSL #1] // Almacenamos el valor en el vector de out
+
+    		bne loop4 //Saltamos al loop de producto escalar siempre y cuando r2 no resulto en cero
+    	pop {r4}
+    	exit4:
+        	bx lr
+
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@                                EJERCICIO 6
+@ void asm_pack32to16(int32_t * vectorIn, int16_t *vectorOut, uint32_t longitud);
+@ Parametros recibidos:
+@   r0: direccion de memoria vectorIn
+@   r1: direccion de memoria vectorOut
+@   r2: longitud
+@
+@ Valor de retorno:
+@   NULL, solo se modifica el vectorOUT
+@
+.thumb_func
+    asm_pack32to16:
+    	push {r4}
+    	sub r2,#1  //Para no acceder a una posicion de memoria invalida
+    	loop6:
+    		ldr r3,[r0,r2, LSL #2] //Cargamos a r3 el valor[i] del vector
+
+    		cmp r3, #0 //Comparamos r3 con cero
+    		ite mi //usamos un bloque condicional ITE
+    		asrmi r4, r3, #16 //se ejecuta si R3 es menor a cero(mi=minus), se hace un
+    						  //desplazamiento aritmetico a la derecha
+		  	lsrpl r4, r3, #16 //se ejecuta si la comparacion es postiva
+    		strh r4, [r1, r2, LSL #1] //Almacenamos el valor empaquetado en un vector de 16 bits
+    		subs r2, #1 //actualizamos indice i
+
+    		bne loop6
+    		pop {r4}
+    	exit6:
+        	bx lr
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@                                EJERCICIO Promedio con ASM normal
+@ void asm_prom(uint16_t *vectorOut,uint16_t *vectorX,uint16_t *vectorY,uint16_t longitud);
+@ Parametros recibidos:
+@   r0: direccion de memoria resultado
+@   r1: direccion de memoria vectorX
+@   r2: direccion de memoria vectorY
+@   r3: longitud
+@
+@ Valor de retorno:
+@   NULL, solo se modifica el vectorOUT
+@
+.thumb_func
+    asm_prom:
+    	push {r4, r5}
+    	//sub r3,#1  //Para no acceder a una posicion de memoria invalida
+    	loop11:
+    		subs r3, #1 //actualizamos indice i, la mejor forma de iterar todos los indices del Vector
+    		ldrh r4,[r1,r3, LSL #1] //Cargamos a r4 el valor[i] del vectorX
+    		ldrh r5,[r2,r3, LSL #1] //Cargamos a r5 el valor[i] del vectory
+			add r5,r4            // Suma r4= r4+r5
+			lsr r5, #1           // desplazamiento logico a la derecha de uno es como dividir para dos
+								// En este caso no hay problema ya que son numeros sin signo
+			strh r5,[r0,r3, LSL #1] //Almacenamos valor[i] del vector resultado en r0[i]
+
+
+    		bne loop11
+    		pop {r4,r5}
+    	exit11:
+        	bx lr
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@                                EJERCICIO Promedio con ASM normal
+@ void asm_promSIMD(uint16_t *vectorOut,uint16_t *vectorX,uint16_t *vectorY,uint16_t longitud);
+@ Parametros recibidos:
+@   r0: direccion de memoria resultado
+@   r1: direccion de memoria vectorX
+@   r2: direccion de memoria vectorY
+@   r3: longitud
+@
+@ Valor de retorno:
+@   NULL, solo se modifica el vectorOUT
+@
+.thumb_func
+    asm_promSIMD:
+    	push {r4, r5}
+    	lsr r3,#1  //Para no acceder a una posicion de memoria invalida, divido para dos
+    	loop12:
+    		subs r3, #1 //actualizamos indice i, la mejor forma de iterar todos los indices del Vector
+    		ldr r4,[r1,r3, LSL #2] //Cargamos a r4 el valor[i] del vectorX pero con instruccion de 32 bits
+    		ldr r5,[r2,r3, LSL #2] //Cargamos a r5 el valor[i] del vectory
+			uhadd16 r5,r5,r4   //Reemplaza a las dos instrucciones de sumar y luego dividir
+			str r5,[r0,r3, LSL #2] //Almacenamos valor[i] del vector resultado en r0[i]
+
+
+    		bne loop12
+    		pop {r4,r5}
+    	exit12:
+        	bx lr
+
+

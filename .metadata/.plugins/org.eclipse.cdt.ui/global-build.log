@@ -160,3 +160,499 @@ arm-none-eabi-size   Ejercicio2.elf
    8764	     20	   1636	  10420	   28b4	Ejercicio2.elf
 Finished building: default.size.stdout
  
+22:55:59 **** Incremental Build of configuration Debug for project Ejercicio2 ****
+make -j12 all 
+arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -DDEBUG -c -x assembler-with-cpp -MMD -MP -MF"Core/Src/asm_func.d" -MT"Core/Src/asm_func.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/asm_func.o" "../Core/Src/asm_func.S"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:118:12: warning: variable 'Ciclos_S' set but not used [-Wunused-but-set-variable]
+  118 |   uint32_t Ciclos_S= 0;
+      |            ^~~~~~~~
+../Core/Src/main.c:107:12: warning: variable 'Ciclos_S1' set but not used [-Wunused-but-set-variable]
+  107 |   uint32_t Ciclos_S1= 0; //ciclos assembler ejercicio 1
+      |            ^~~~~~~~~
+../Core/Src/main.c:99:12: warning: variable 'Ciclos_c' set but not used [-Wunused-but-set-variable]
+   99 |   uint32_t Ciclos_c= 0;
+      |            ^~~~~~~~
+arm-none-eabi-gcc -o "Ejercicio2.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\thony\Documents\Maestria\Arquitectura de Microcontroladores\Programacion\Arquitectura-de-Microcontroladores\Ejercicio2\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Ejercicio2.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Ejercicio2.elf
+ 
+arm-none-eabi-size   Ejercicio2.elf 
+arm-none-eabi-objdump -h -S  Ejercicio2.elf  > "Ejercicio2.list"
+   text	   data	    bss	    dec	    hex	filename
+   8788	     20	   1636	  10444	   28cc	Ejercicio2.elf
+Finished building: default.size.stdout
+ 
+Finished building: Ejercicio2.list
+ 
+22:59:39 **** Incremental Build of configuration Debug for project Ejercicio2 ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:127:12: warning: variable 'Ciclos_3' set but not used [-Wunused-but-set-variable]
+  127 |   uint32_t Ciclos_3= 0;
+      |            ^~~~~~~~
+../Core/Src/main.c:118:12: warning: variable 'Ciclos_S' set but not used [-Wunused-but-set-variable]
+  118 |   uint32_t Ciclos_S= 0;
+      |            ^~~~~~~~
+../Core/Src/main.c:107:12: warning: variable 'Ciclos_S1' set but not used [-Wunused-but-set-variable]
+  107 |   uint32_t Ciclos_S1= 0; //ciclos assembler ejercicio 1
+      |            ^~~~~~~~~
+../Core/Src/main.c:99:12: warning: variable 'Ciclos_c' set but not used [-Wunused-but-set-variable]
+   99 |   uint32_t Ciclos_c= 0;
+      |            ^~~~~~~~
+arm-none-eabi-gcc -o "Ejercicio2.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\thony\Documents\Maestria\Arquitectura de Microcontroladores\Programacion\Arquitectura-de-Microcontroladores\Ejercicio2\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Ejercicio2.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Ejercicio2.elf
+ 
+arm-none-eabi-size   Ejercicio2.elf 
+arm-none-eabi-objdump -h -S  Ejercicio2.elf  > "Ejercicio2.list"
+   text	   data	    bss	    dec	    hex	filename
+   8880	     20	   1636	  10536	   2928	Ejercicio2.elf
+Finished building: default.size.stdout
+ 
+Finished building: Ejercicio2.list
+ 
+23:00:51 **** Incremental Build of configuration Debug for project Ejercicio2 ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:129:12: warning: variable 'Ciclos_3' set but not used [-Wunused-but-set-variable]
+  129 |   uint32_t Ciclos_3= 0;
+      |            ^~~~~~~~
+arm-none-eabi-gcc -o "Ejercicio2.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\thony\Documents\Maestria\Arquitectura de Microcontroladores\Programacion\Arquitectura-de-Microcontroladores\Ejercicio2\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Ejercicio2.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Ejercicio2.elf
+ 
+arm-none-eabi-size   Ejercicio2.elf 
+arm-none-eabi-objdump -h -S  Ejercicio2.elf  > "Ejercicio2.list"
+   text	   data	    bss	    dec	    hex	filename
+   8556	     20	   1636	  10212	   27e4	Ejercicio2.elf
+Finished building: default.size.stdout
+ 
+Finished building: Ejercicio2.list
+ 
+23:01:37 **** Incremental Build of configuration Debug for project Ejercicio2 ****
+make -j12 all 
+arm-none-eabi-size   Ejercicio2.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8556	     20	   1636	  10212	   27e4	Ejercicio2.elf
+Finished building: default.size.stdout
+ 
+23:04:01 **** Incremental Build of configuration Debug for project Ejercicio2 ****
+make -j12 all 
+arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -DDEBUG -c -x assembler-with-cpp -MMD -MP -MF"Core/Src/asm_func.d" -MT"Core/Src/asm_func.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/asm_func.o" "../Core/Src/asm_func.S"
+arm-none-eabi-gcc -o "Ejercicio2.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\thony\Documents\Maestria\Arquitectura de Microcontroladores\Programacion\Arquitectura-de-Microcontroladores\Ejercicio2\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Ejercicio2.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Ejercicio2.elf
+ 
+arm-none-eabi-size   Ejercicio2.elf 
+arm-none-eabi-objdump -h -S  Ejercicio2.elf  > "Ejercicio2.list"
+   text	   data	    bss	    dec	    hex	filename
+   8556	     20	   1636	  10212	   27e4	Ejercicio2.elf
+Finished building: default.size.stdout
+ 
+Finished building: Ejercicio2.list
+ 
+23:04:08 **** Incremental Build of configuration Debug for project Ejercicio2 ****
+make -j12 all 
+arm-none-eabi-size   Ejercicio2.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8556	     20	   1636	  10212	   27e4	Ejercicio2.elf
+Finished building: default.size.stdout
+ 
+23:11:11 **** Incremental Build of configuration Debug for project Ejercicio2 ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:129:12: warning: variable 'Ciclos_3' set but not used [-Wunused-but-set-variable]
+  129 |   uint32_t Ciclos_3= 0;
+      |            ^~~~~~~~
+arm-none-eabi-gcc -o "Ejercicio2.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\thony\Documents\Maestria\Arquitectura de Microcontroladores\Programacion\Arquitectura-de-Microcontroladores\Ejercicio2\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Ejercicio2.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Ejercicio2.elf
+ 
+arm-none-eabi-size   Ejercicio2.elf 
+arm-none-eabi-objdump -h -S  Ejercicio2.elf  > "Ejercicio2.list"
+   text	   data	    bss	    dec	    hex	filename
+   8556	     20	   1636	  10212	   27e4	Ejercicio2.elf
+Finished building: default.size.stdout
+ 
+Finished building: Ejercicio2.list
+ 
+23:11:15 **** Incremental Build of configuration Debug for project Ejercicio2 ****
+make -j12 all 
+arm-none-eabi-size   Ejercicio2.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8556	     20	   1636	  10212	   27e4	Ejercicio2.elf
+Finished building: default.size.stdout
+ 
+23:32:08 **** Incremental Build of configuration Debug for project Ejercicio2 ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:129:12: warning: variable 'Ciclos_3' set but not used [-Wunused-but-set-variable]
+  129 |   uint32_t Ciclos_3= 0;
+      |            ^~~~~~~~
+arm-none-eabi-gcc -o "Ejercicio2.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\thony\Documents\Maestria\Arquitectura de Microcontroladores\Programacion\Arquitectura-de-Microcontroladores\Ejercicio2\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Ejercicio2.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Ejercicio2.elf
+ 
+arm-none-eabi-size   Ejercicio2.elf 
+arm-none-eabi-objdump -h -S  Ejercicio2.elf  > "Ejercicio2.list"
+   text	   data	    bss	    dec	    hex	filename
+   8556	     20	   1636	  10212	   27e4	Ejercicio2.elf
+Finished building: default.size.stdout
+ 
+Finished building: Ejercicio2.list
+ 
+23:32:15 **** Incremental Build of configuration Debug for project Ejercicio2 ****
+make -j12 all 
+arm-none-eabi-size   Ejercicio2.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8556	     20	   1636	  10212	   27e4	Ejercicio2.elf
+Finished building: default.size.stdout
+ 
+23:45:02 **** Incremental Build of configuration Debug for project Ejercicio2 ****
+make -j12 all 
+arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -DDEBUG -c -x assembler-with-cpp -MMD -MP -MF"Core/Src/asm_func.d" -MT"Core/Src/asm_func.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/asm_func.o" "../Core/Src/asm_func.S"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/asm_func.S: Assembler messages:
+../Core/Src/asm_func.S:156: Error: bad instruction `ussat r4,#12,r4'
+make: *** [Core/Src/subdir.mk:41: Core/Src/asm_func.o] Error 1
+make: *** Waiting for unfinished jobs....
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:139:12: warning: variable 'Ciclos_4' set but not used [-Wunused-but-set-variable]
+  139 |   uint32_t Ciclos_4= 0;
+      |            ^~~~~~~~
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+23:48:21 **** Incremental Build of configuration Debug for project Ejercicio2 ****
+make -j12 all 
+arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -DDEBUG -c -x assembler-with-cpp -MMD -MP -MF"Core/Src/asm_func.d" -MT"Core/Src/asm_func.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/asm_func.o" "../Core/Src/asm_func.S"
+arm-none-eabi-gcc -o "Ejercicio2.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\thony\Documents\Maestria\Arquitectura de Microcontroladores\Programacion\Arquitectura-de-Microcontroladores\Ejercicio2\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Ejercicio2.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Ejercicio2.elf
+ 
+arm-none-eabi-size   Ejercicio2.elf 
+arm-none-eabi-objdump -h -S  Ejercicio2.elf  > "Ejercicio2.list"
+   text	   data	    bss	    dec	    hex	filename
+   8580	     20	   1636	  10236	   27fc	Ejercicio2.elf
+Finished building: default.size.stdout
+ 
+Finished building: Ejercicio2.list
+ 
+23:48:26 **** Incremental Build of configuration Debug for project Ejercicio2 ****
+make -j12 all 
+arm-none-eabi-size   Ejercicio2.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8580	     20	   1636	  10236	   27fc	Ejercicio2.elf
+Finished building: default.size.stdout
+ 
+00:57:36 **** Incremental Build of configuration Debug for project Ejercicio2 ****
+make -j12 all 
+arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -DDEBUG -c -x assembler-with-cpp -MMD -MP -MF"Core/Src/asm_func.d" -MT"Core/Src/asm_func.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/asm_func.o" "../Core/Src/asm_func.S"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:149:12: warning: unused variable 'largo' [-Wunused-variable]
+  149 |   uint16_t largo= 5;
+      |            ^~~~~
+../Core/Src/main.c:148:11: warning: unused variable 'vecOut_6' [-Wunused-variable]
+  148 |   int16_t vecOut_6[tamano];
+      |           ^~~~~~~~
+../Core/Src/main.c:147:11: warning: unused variable 'vectIn_6' [-Wunused-variable]
+  147 |   int32_t vectIn_6[tamano]={0xFAFAFAFA, 0xFAFAFAFC, 0xFBDF0A0A, 0xFFFF1234, 0xFFAAFFAA};
+      |           ^~~~~~~~
+../Core/Src/main.c:139:12: warning: variable 'Ciclos_4' set but not used [-Wunused-but-set-variable]
+  139 |   uint32_t Ciclos_4= 0;
+      |            ^~~~~~~~
+arm-none-eabi-gcc -o "Ejercicio2.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\thony\Documents\Maestria\Arquitectura de Microcontroladores\Programacion\Arquitectura-de-Microcontroladores\Ejercicio2\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Ejercicio2.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Ejercicio2.elf
+ 
+arm-none-eabi-size   Ejercicio2.elf 
+arm-none-eabi-objdump -h -S  Ejercicio2.elf  > "Ejercicio2.list"
+   text	   data	    bss	    dec	    hex	filename
+   8656	     20	   1636	  10312	   2848	Ejercicio2.elf
+Finished building: default.size.stdout
+ 
+Finished building: Ejercicio2.list
+ 
+00:58:04 **** Incremental Build of configuration Debug for project Ejercicio2 ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:139:12: warning: variable 'Ciclos_4' set but not used [-Wunused-but-set-variable]
+  139 |   uint32_t Ciclos_4= 0;
+      |            ^~~~~~~~
+arm-none-eabi-gcc -o "Ejercicio2.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\thony\Documents\Maestria\Arquitectura de Microcontroladores\Programacion\Arquitectura-de-Microcontroladores\Ejercicio2\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Ejercicio2.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Ejercicio2.elf
+ 
+arm-none-eabi-size   Ejercicio2.elf 
+arm-none-eabi-objdump -h -S  Ejercicio2.elf  > "Ejercicio2.list"
+   text	   data	    bss	    dec	    hex	filename
+   8672	     20	   1636	  10328	   2858	Ejercicio2.elf
+Finished building: default.size.stdout
+ 
+Finished building: Ejercicio2.list
+ 
+00:58:11 **** Incremental Build of configuration Debug for project Ejercicio2 ****
+make -j12 all 
+arm-none-eabi-size   Ejercicio2.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8672	     20	   1636	  10328	   2858	Ejercicio2.elf
+Finished building: default.size.stdout
+ 
+07:04:58 **** Incremental Build of configuration Debug for project Ejercicio2 ****
+make -j12 all 
+arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -DDEBUG -c -x assembler-with-cpp -MMD -MP -MF"Core/Src/asm_func.d" -MT"Core/Src/asm_func.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/asm_func.o" "../Core/Src/asm_func.S"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:158:12: warning: unused variable 'vectorY' [-Wunused-variable]
+  158 |   uint16_t vectorY[tamano]={6,7,10,15,15};
+      |            ^~~~~~~
+../Core/Src/main.c:157:12: warning: unused variable 'vectorX' [-Wunused-variable]
+  157 |   uint16_t vectorX[tamano]={2,3,4,5,35};
+      |            ^~~~~~~
+../Core/Src/main.c:156:12: warning: unused variable 'vectorZ' [-Wunused-variable]
+  156 |   uint16_t vectorZ[tamano];
+      |            ^~~~~~~
+arm-none-eabi-gcc -o "Ejercicio2.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\thony\Documents\Maestria\Arquitectura de Microcontroladores\Programacion\Arquitectura-de-Microcontroladores\Ejercicio2\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Ejercicio2.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Ejercicio2.elf
+ 
+arm-none-eabi-size   Ejercicio2.elf 
+arm-none-eabi-objdump -h -S  Ejercicio2.elf  > "Ejercicio2.list"
+   text	   data	    bss	    dec	    hex	filename
+   8468	     20	   1636	  10124	   278c	Ejercicio2.elf
+Finished building: default.size.stdout
+ 
+Finished building: Ejercicio2.list
+ 
+07:05:57 **** Incremental Build of configuration Debug for project Ejercicio2 ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:160:12: warning: variable 'Ciclos_11' set but not used [-Wunused-but-set-variable]
+  160 |   uint32_t Ciclos_11= 0;
+      |            ^~~~~~~~~
+arm-none-eabi-gcc -o "Ejercicio2.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\thony\Documents\Maestria\Arquitectura de Microcontroladores\Programacion\Arquitectura-de-Microcontroladores\Ejercicio2\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Ejercicio2.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Ejercicio2.elf
+ 
+arm-none-eabi-size   Ejercicio2.elf 
+arm-none-eabi-objdump -h -S  Ejercicio2.elf  > "Ejercicio2.list"
+   text	   data	    bss	    dec	    hex	filename
+   8668	     20	   1636	  10324	   2854	Ejercicio2.elf
+Finished building: default.size.stdout
+ 
+Finished building: Ejercicio2.list
+ 
+07:06:09 **** Incremental Build of configuration Debug for project Ejercicio2 ****
+make -j12 all 
+arm-none-eabi-size   Ejercicio2.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8668	     20	   1636	  10324	   2854	Ejercicio2.elf
+Finished building: default.size.stdout
+ 
+07:07:06 **** Incremental Build of configuration Debug for project Ejercicio2 ****
+make -j12 all 
+arm-none-eabi-size   Ejercicio2.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8668	     20	   1636	  10324	   2854	Ejercicio2.elf
+Finished building: default.size.stdout
+ 
+07:08:21 **** Incremental Build of configuration Debug for project Ejercicio2 ****
+make -j12 all 
+arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -DDEBUG -c -x assembler-with-cpp -MMD -MP -MF"Core/Src/asm_func.d" -MT"Core/Src/asm_func.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/asm_func.o" "../Core/Src/asm_func.S"
+arm-none-eabi-gcc -o "Ejercicio2.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\thony\Documents\Maestria\Arquitectura de Microcontroladores\Programacion\Arquitectura-de-Microcontroladores\Ejercicio2\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Ejercicio2.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Ejercicio2.elf
+ 
+arm-none-eabi-size   Ejercicio2.elf 
+arm-none-eabi-objdump -h -S  Ejercicio2.elf  > "Ejercicio2.list"
+   text	   data	    bss	    dec	    hex	filename
+   8668	     20	   1636	  10324	   2854	Ejercicio2.elf
+Finished building: default.size.stdout
+ 
+Finished building: Ejercicio2.list
+ 
+07:08:28 **** Incremental Build of configuration Debug for project Ejercicio2 ****
+make -j12 all 
+arm-none-eabi-size   Ejercicio2.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8668	     20	   1636	  10324	   2854	Ejercicio2.elf
+Finished building: default.size.stdout
+ 
+07:10:15 **** Incremental Build of configuration Debug for project Ejercicio2 ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:160:12: warning: variable 'Ciclos_11' set but not used [-Wunused-but-set-variable]
+  160 |   uint32_t Ciclos_11= 0;
+      |            ^~~~~~~~~
+arm-none-eabi-gcc -o "Ejercicio2.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\thony\Documents\Maestria\Arquitectura de Microcontroladores\Programacion\Arquitectura-de-Microcontroladores\Ejercicio2\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Ejercicio2.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Ejercicio2.elf
+ 
+arm-none-eabi-size   Ejercicio2.elf 
+arm-none-eabi-objdump -h -S  Ejercicio2.elf  > "Ejercicio2.list"
+   text	   data	    bss	    dec	    hex	filename
+   8672	     20	   1636	  10328	   2858	Ejercicio2.elf
+Finished building: default.size.stdout
+ 
+Finished building: Ejercicio2.list
+ 
+07:10:19 **** Incremental Build of configuration Debug for project Ejercicio2 ****
+make -j12 all 
+arm-none-eabi-size   Ejercicio2.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8672	     20	   1636	  10328	   2858	Ejercicio2.elf
+Finished building: default.size.stdout
+ 
+07:14:31 **** Incremental Build of configuration Debug for project Ejercicio2 ****
+make -j12 all 
+arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -DDEBUG -c -x assembler-with-cpp -MMD -MP -MF"Core/Src/asm_func.d" -MT"Core/Src/asm_func.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/asm_func.o" "../Core/Src/asm_func.S"
+arm-none-eabi-gcc -o "Ejercicio2.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\thony\Documents\Maestria\Arquitectura de Microcontroladores\Programacion\Arquitectura-de-Microcontroladores\Ejercicio2\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Ejercicio2.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Ejercicio2.elf
+ 
+arm-none-eabi-size   Ejercicio2.elf 
+arm-none-eabi-objdump -h -S  Ejercicio2.elf  > "Ejercicio2.list"
+   text	   data	    bss	    dec	    hex	filename
+   8672	     20	   1636	  10328	   2858	Ejercicio2.elf
+Finished building: default.size.stdout
+ 
+Finished building: Ejercicio2.list
+ 
+07:14:39 **** Incremental Build of configuration Debug for project Ejercicio2 ****
+make -j12 all 
+arm-none-eabi-size   Ejercicio2.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8672	     20	   1636	  10328	   2858	Ejercicio2.elf
+Finished building: default.size.stdout
+ 
+07:14:42 **** Incremental Build of configuration Debug for project Ejercicio2 ****
+make -j12 all 
+arm-none-eabi-size   Ejercicio2.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8672	     20	   1636	  10328	   2858	Ejercicio2.elf
+Finished building: default.size.stdout
+ 
+07:18:39 **** Incremental Build of configuration Debug for project Ejercicio2 ****
+make -j12 all 
+arm-none-eabi-size   Ejercicio2.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8672	     20	   1636	  10328	   2858	Ejercicio2.elf
+Finished building: default.size.stdout
+ 
+07:24:19 **** Incremental Build of configuration Debug for project Ejercicio2 ****
+make -j12 all 
+arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -DDEBUG -c -x assembler-with-cpp -MMD -MP -MF"Core/Src/asm_func.d" -MT"Core/Src/asm_func.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/asm_func.o" "../Core/Src/asm_func.S"
+../Core/Src/asm_func.S: Assembler messages:
+../Core/Src/asm_func.S:226: Error: ARM register expected -- `cbz'
+make: *** [Core/Src/subdir.mk:41: Core/Src/asm_func.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+07:24:33 **** Incremental Build of configuration Debug for project Ejercicio2 ****
+make -j12 all 
+arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -DDEBUG -c -x assembler-with-cpp -MMD -MP -MF"Core/Src/asm_func.d" -MT"Core/Src/asm_func.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/asm_func.o" "../Core/Src/asm_func.S"
+arm-none-eabi-gcc -o "Ejercicio2.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\thony\Documents\Maestria\Arquitectura de Microcontroladores\Programacion\Arquitectura-de-Microcontroladores\Ejercicio2\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Ejercicio2.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Ejercicio2.elf
+ 
+arm-none-eabi-size   Ejercicio2.elf 
+arm-none-eabi-objdump -h -S  Ejercicio2.elf  > "Ejercicio2.list"
+   text	   data	    bss	    dec	    hex	filename
+   8668	     20	   1636	  10324	   2854	Ejercicio2.elf
+Finished building: default.size.stdout
+ 
+Finished building: Ejercicio2.list
+ 
+07:24:40 **** Incremental Build of configuration Debug for project Ejercicio2 ****
+make -j12 all 
+arm-none-eabi-size   Ejercicio2.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8668	     20	   1636	  10324	   2854	Ejercicio2.elf
+Finished building: default.size.stdout
+ 
+07:47:33 **** Incremental Build of configuration Debug for project Ejercicio2 ****
+make -j12 all 
+arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -DDEBUG -c -x assembler-with-cpp -MMD -MP -MF"Core/Src/asm_func.d" -MT"Core/Src/asm_func.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/asm_func.o" "../Core/Src/asm_func.S"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:160:12: warning: variable 'Ciclos_11' set but not used [-Wunused-but-set-variable]
+  160 |   uint32_t Ciclos_11= 0;
+      |            ^~~~~~~~~
+arm-none-eabi-gcc -o "Ejercicio2.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\thony\Documents\Maestria\Arquitectura de Microcontroladores\Programacion\Arquitectura-de-Microcontroladores\Ejercicio2\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Ejercicio2.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Ejercicio2.elf
+ 
+arm-none-eabi-size   Ejercicio2.elf 
+arm-none-eabi-objdump -h -S  Ejercicio2.elf  > "Ejercicio2.list"
+   text	   data	    bss	    dec	    hex	filename
+   8696	     20	   1636	  10352	   2870	Ejercicio2.elf
+Finished building: default.size.stdout
+ 
+Finished building: Ejercicio2.list
+ 
+07:47:45 **** Incremental Build of configuration Debug for project Ejercicio2 ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:160:12: warning: variable 'Ciclos_11' set but not used [-Wunused-but-set-variable]
+  160 |   uint32_t Ciclos_11= 0;
+      |            ^~~~~~~~~
+arm-none-eabi-gcc -o "Ejercicio2.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\thony\Documents\Maestria\Arquitectura de Microcontroladores\Programacion\Arquitectura-de-Microcontroladores\Ejercicio2\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Ejercicio2.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+C:/ST/STM32CubeIDE_1.13.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.0.202305231506/tools/bin/../lib/gcc/arm-none-eabi/11.3.1/../../../../arm-none-eabi/bin/ld.exe: ./Core/Src/main.o: in function `main':
+C:/Users/thony/Documents/Maestria/Arquitectura de Microcontroladores/Programacion/Arquitectura-de-Microcontroladores/Ejercicio2/Debug/../Core/Src/main.c:162: undefined reference to `asm_promSIMD'
+collect2.exe: error: ld returned 1 exit status
+make: *** [makefile:64: Ejercicio2.elf] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+07:47:57 **** Incremental Build of configuration Debug for project Ejercicio2 ****
+make -j12 all 
+arm-none-eabi-size   Ejercicio2.elf 
+arm-none-eabi-objdump -h -S  Ejercicio2.elf  > "Ejercicio2.list"
+arm-none-eabi-size: Ejercicio2.elf: file format not recognized
+make: *** [makefile:69: default.size.stdout] Error 3
+make: *** Waiting for unfinished jobs....
+arm-none-eabi-objdump: Ejercicio2.elf: file format not recognized
+make: *** [makefile:74: Ejercicio2.list] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+07:48:14 **** Incremental Build of configuration Debug for project Ejercicio2 ****
+make -j12 all 
+arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -DDEBUG -c -x assembler-with-cpp -MMD -MP -MF"Core/Src/asm_func.d" -MT"Core/Src/asm_func.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/asm_func.o" "../Core/Src/asm_func.S"
+arm-none-eabi-gcc -o "Ejercicio2.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\thony\Documents\Maestria\Arquitectura de Microcontroladores\Programacion\Arquitectura-de-Microcontroladores\Ejercicio2\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Ejercicio2.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Ejercicio2.elf
+ 
+arm-none-eabi-size   Ejercicio2.elf 
+arm-none-eabi-objdump -h -S  Ejercicio2.elf  > "Ejercicio2.list"
+   text	   data	    bss	    dec	    hex	filename
+   8696	     20	   1636	  10352	   2870	Ejercicio2.elf
+Finished building: default.size.stdout
+ 
+Finished building: Ejercicio2.list
+ 
+07:48:19 **** Incremental Build of configuration Debug for project Ejercicio2 ****
+make -j12 all 
+arm-none-eabi-size   Ejercicio2.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8696	     20	   1636	  10352	   2870	Ejercicio2.elf
+Finished building: default.size.stdout
+ 
+07:49:30 **** Incremental Build of configuration Debug for project Ejercicio2 ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:160:12: warning: variable 'Ciclos_11' set but not used [-Wunused-but-set-variable]
+  160 |   uint32_t Ciclos_11= 0;
+      |            ^~~~~~~~~
+arm-none-eabi-gcc -o "Ejercicio2.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\thony\Documents\Maestria\Arquitectura de Microcontroladores\Programacion\Arquitectura-de-Microcontroladores\Ejercicio2\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Ejercicio2.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Ejercicio2.elf
+ 
+arm-none-eabi-size   Ejercicio2.elf 
+arm-none-eabi-objdump -h -S  Ejercicio2.elf  > "Ejercicio2.list"
+   text	   data	    bss	    dec	    hex	filename
+   8696	     20	   1636	  10352	   2870	Ejercicio2.elf
+Finished building: default.size.stdout
+ 
+Finished building: Ejercicio2.list
+ 
+07:49:35 **** Incremental Build of configuration Debug for project Ejercicio2 ****
+make -j12 all 
+arm-none-eabi-size   Ejercicio2.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8696	     20	   1636	  10352	   2870	Ejercicio2.elf
+Finished building: default.size.stdout
+ 
+07:49:48 **** Incremental Build of configuration Debug for project Ejercicio2 ****
+make -j12 all 
+arm-none-eabi-size   Ejercicio2.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8696	     20	   1636	  10352	   2870	Ejercicio2.elf
+Finished building: default.size.stdout
+ 
