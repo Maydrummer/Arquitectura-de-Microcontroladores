@@ -770,3 +770,6 @@ org.eclipse.core.runtime.CoreException: Setup exceptions
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 !SUBENTRY 1 com.st.stm32cube.ide.mcu.debug.launch 4 0 2023-10-14 07:49:43.253
 !MESSAGE Setup exceptions
+
+!ENTRY org.eclipse.cdt.core 1 0 2023-10-14 08:04:17.229
+!MESSAGE Indexed 'Examen' (22 sources, 111 headers) in 4.16 sec: 9,882 declarations; 43,445 references; 2 unresolved inclusions; 42 syntax errors; 147 unresolved names (0.27%)

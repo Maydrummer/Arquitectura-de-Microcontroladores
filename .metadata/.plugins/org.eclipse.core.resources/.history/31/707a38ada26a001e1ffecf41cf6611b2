@@ -1,0 +1,17 @@
+#pragma once
+
+#include <stdint.h>
+
+
+//Promedio en ASM normal
+
+void asm_prom(uint16_t *vectorOut,uint16_t *vectorX,uint16_t *vectorY,uint16_t longitud);
+
+//Promedio en ASM con SIMD
+
+void asm_promSIMD(uint16_t *vectorOut,uint16_t *vectorX,uint16_t *vectorY,uint16_t longitud);
+
+//Prototipo funcion normal
+void asm_medDif(int8_t * e, int8_t *x, int8_t *y, uint16_t longitud);
+
+

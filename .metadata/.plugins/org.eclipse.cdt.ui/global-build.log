@@ -656,3 +656,320 @@ arm-none-eabi-size   Ejercicio2.elf
    8696	     20	   1636	  10352	   2870	Ejercicio2.elf
 Finished building: default.size.stdout
  
+08:04:39 **** Build of configuration Debug for project Examen ****
+make -j12 all 
+arm-none-eabi-gcc -o "Examen.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\thony\Documents\Maestria\Arquitectura de Microcontroladores\Programacion\Arquitectura-de-Microcontroladores\Examen\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Examen.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Examen.elf
+ 
+arm-none-eabi-size   Examen.elf 
+arm-none-eabi-objdump -h -S  Examen.elf  > "Examen.list"
+   text	   data	    bss	    dec	    hex	filename
+   8696	     20	   1636	  10352	   2870	Examen.elf
+Finished building: default.size.stdout
+ 
+Finished building: Examen.list
+ 
+08:04:53 **** Incremental Build of configuration Debug for project Examen ****
+make -j12 all 
+arm-none-eabi-size   Examen.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8696	     20	   1636	  10352	   2870	Examen.elf
+Finished building: default.size.stdout
+ 
+09:02:31 **** Incremental Build of configuration Debug for project Examen ****
+make -j12 all 
+arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -DDEBUG -c -x assembler-with-cpp -MMD -MP -MF"Core/Src/asm_func.d" -MT"Core/Src/asm_func.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/asm_func.o" "../Core/Src/asm_func.S"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/asm_func.S: Assembler messages:
+../Core/Src/asm_func.S:26: Error: Thumb supports only LSL in shifted register indexing -- `ldrsb r4,[r1,r3,LSR#1]'
+../Core/Src/asm_func.S:27: Error: Thumb supports only LSL in shifted register indexing -- `ldrsb r5,[r2,r3,LSR#1]'
+../Core/Src/asm_func.S:31: Error: Thumb supports only LSL in shifted register indexing -- `strb r5,[r0,r3,LSR#1]'
+make: *** [Core/Src/subdir.mk:41: Core/Src/asm_func.o] Error 1
+make: *** Waiting for unfinished jobs....
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:108:12: warning: unused variable 'lon' [-Wunused-variable]
+  108 |   uint16_t lon = sizeof(vecx)/sizeof(vecx[0]);
+      |            ^~~
+../Core/Src/main.c:107:10: warning: unused variable 'vecy' [-Wunused-variable]
+  107 |   int8_t vecy[] = {18, 86, 0, -1, 59, -11, 76, -108, 1, -40, 67, 122};
+      |          ^~~~
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+09:03:06 **** Incremental Build of configuration Debug for project Examen ****
+make -j12 all 
+arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -DDEBUG -c -x assembler-with-cpp -MMD -MP -MF"Core/Src/asm_func.d" -MT"Core/Src/asm_func.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/asm_func.o" "../Core/Src/asm_func.S"
+arm-none-eabi-gcc -o "Examen.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\thony\Documents\Maestria\Arquitectura de Microcontroladores\Programacion\Arquitectura-de-Microcontroladores\Examen\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Examen.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Examen.elf
+ 
+arm-none-eabi-size   Examen.elf 
+arm-none-eabi-objdump -h -S  Examen.elf  > "Examen.list"
+   text	   data	    bss	    dec	    hex	filename
+   8472	     20	   1636	  10128	   2790	Examen.elf
+Finished building: default.size.stdout
+ 
+Finished building: Examen.list
+ 
+09:03:46 **** Incremental Build of configuration Debug for project Examen ****
+make -j12 all 
+arm-none-eabi-size   Examen.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8472	     20	   1636	  10128	   2790	Examen.elf
+Finished building: default.size.stdout
+ 
+09:04:33 **** Incremental Build of configuration Debug for project Examen ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:108:10: error: array size missing in 'resultado'
+  108 |   int8_t resultado[];
+      |          ^~~~~~~~~
+make: *** [Core/Src/subdir.mk:43: Core/Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+09:04:42 **** Incremental Build of configuration Debug for project Examen ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:108:10: error: array size missing in 'resultado'
+  108 |   int8_t resultado[];
+      |          ^~~~~~~~~
+make: *** [Core/Src/subdir.mk:43: Core/Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+09:05:07 **** Incremental Build of configuration Debug for project Examen ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Examen.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\thony\Documents\Maestria\Arquitectura de Microcontroladores\Programacion\Arquitectura-de-Microcontroladores\Examen\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Examen.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Examen.elf
+ 
+arm-none-eabi-size   Examen.elf 
+arm-none-eabi-objdump -h -S  Examen.elf  > "Examen.list"
+   text	   data	    bss	    dec	    hex	filename
+   8624	     20	   1636	  10280	   2828	Examen.elf
+Finished building: default.size.stdout
+ 
+Finished building: Examen.list
+ 
+09:05:26 **** Incremental Build of configuration Debug for project Examen ****
+make -j12 all 
+arm-none-eabi-size   Examen.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8624	     20	   1636	  10280	   2828	Examen.elf
+Finished building: default.size.stdout
+ 
+09:09:58 **** Incremental Build of configuration Debug for project Examen ****
+make -j12 all 
+arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -DDEBUG -c -x assembler-with-cpp -MMD -MP -MF"Core/Src/asm_func.d" -MT"Core/Src/asm_func.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/asm_func.o" "../Core/Src/asm_func.S"
+arm-none-eabi-gcc -o "Examen.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\thony\Documents\Maestria\Arquitectura de Microcontroladores\Programacion\Arquitectura-de-Microcontroladores\Examen\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Examen.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Examen.elf
+ 
+arm-none-eabi-size   Examen.elf 
+arm-none-eabi-objdump -h -S  Examen.elf  > "Examen.list"
+   text	   data	    bss	    dec	    hex	filename
+   8624	     20	   1636	  10280	   2828	Examen.elf
+Finished building: default.size.stdout
+ 
+Finished building: Examen.list
+ 
+09:10:07 **** Incremental Build of configuration Debug for project Examen ****
+make -j12 all 
+arm-none-eabi-size   Examen.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8624	     20	   1636	  10280	   2828	Examen.elf
+Finished building: default.size.stdout
+ 
+09:12:58 **** Incremental Build of configuration Debug for project Examen ****
+make -j12 all 
+arm-none-eabi-size   Examen.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8624	     20	   1636	  10280	   2828	Examen.elf
+Finished building: default.size.stdout
+ 
+09:15:50 **** Incremental Build of configuration Debug for project Examen ****
+make -j12 all 
+arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -DDEBUG -c -x assembler-with-cpp -MMD -MP -MF"Core/Src/asm_func.d" -MT"Core/Src/asm_func.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/asm_func.o" "../Core/Src/asm_func.S"
+arm-none-eabi-gcc -o "Examen.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\thony\Documents\Maestria\Arquitectura de Microcontroladores\Programacion\Arquitectura-de-Microcontroladores\Examen\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Examen.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Examen.elf
+ 
+arm-none-eabi-size   Examen.elf 
+arm-none-eabi-objdump -h -S  Examen.elf  > "Examen.list"
+   text	   data	    bss	    dec	    hex	filename
+   8624	     20	   1636	  10280	   2828	Examen.elf
+Finished building: default.size.stdout
+ 
+Finished building: Examen.list
+ 
+09:15:54 **** Incremental Build of configuration Debug for project Examen ****
+make -j12 all 
+arm-none-eabi-size   Examen.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8624	     20	   1636	  10280	   2828	Examen.elf
+Finished building: default.size.stdout
+ 
+09:23:09 **** Incremental Build of configuration Debug for project Examen ****
+make -j12 all 
+arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -DDEBUG -c -x assembler-with-cpp -MMD -MP -MF"Core/Src/asm_func.d" -MT"Core/Src/asm_func.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/asm_func.o" "../Core/Src/asm_func.S"
+arm-none-eabi-gcc -o "Examen.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\thony\Documents\Maestria\Arquitectura de Microcontroladores\Programacion\Arquitectura-de-Microcontroladores\Examen\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Examen.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Examen.elf
+ 
+arm-none-eabi-size   Examen.elf 
+arm-none-eabi-objdump -h -S  Examen.elf  > "Examen.list"
+   text	   data	    bss	    dec	    hex	filename
+   8624	     20	   1636	  10280	   2828	Examen.elf
+Finished building: default.size.stdout
+ 
+Finished building: Examen.list
+ 
+09:23:26 **** Incremental Build of configuration Debug for project Examen ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Examen.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\thony\Documents\Maestria\Arquitectura de Microcontroladores\Programacion\Arquitectura-de-Microcontroladores\Examen\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Examen.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Examen.elf
+ 
+arm-none-eabi-size   Examen.elf 
+arm-none-eabi-objdump -h -S  Examen.elf  > "Examen.list"
+   text	   data	    bss	    dec	    hex	filename
+   8624	     20	   1636	  10280	   2828	Examen.elf
+Finished building: default.size.stdout
+ 
+Finished building: Examen.list
+ 
+09:23:30 **** Incremental Build of configuration Debug for project Examen ****
+make -j12 all 
+arm-none-eabi-size   Examen.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8624	     20	   1636	  10280	   2828	Examen.elf
+Finished building: default.size.stdout
+ 
+09:29:59 **** Incremental Build of configuration Debug for project Examen ****
+make -j12 all 
+arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -DDEBUG -c -x assembler-with-cpp -MMD -MP -MF"Core/Src/asm_func.d" -MT"Core/Src/asm_func.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/asm_func.o" "../Core/Src/asm_func.S"
+arm-none-eabi-gcc -o "Examen.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\thony\Documents\Maestria\Arquitectura de Microcontroladores\Programacion\Arquitectura-de-Microcontroladores\Examen\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Examen.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Examen.elf
+ 
+arm-none-eabi-size   Examen.elf 
+arm-none-eabi-objdump -h -S  Examen.elf  > "Examen.list"
+   text	   data	    bss	    dec	    hex	filename
+   8620	     20	   1636	  10276	   2824	Examen.elf
+Finished building: default.size.stdout
+ 
+Finished building: Examen.list
+ 
+09:30:02 **** Incremental Build of configuration Debug for project Examen ****
+make -j12 all 
+arm-none-eabi-size   Examen.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8620	     20	   1636	  10276	   2824	Examen.elf
+Finished building: default.size.stdout
+ 
+09:32:33 **** Incremental Build of configuration Debug for project Examen ****
+make -j12 all 
+arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -DDEBUG -c -x assembler-with-cpp -MMD -MP -MF"Core/Src/asm_func.d" -MT"Core/Src/asm_func.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/asm_func.o" "../Core/Src/asm_func.S"
+arm-none-eabi-gcc -o "Examen.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\thony\Documents\Maestria\Arquitectura de Microcontroladores\Programacion\Arquitectura-de-Microcontroladores\Examen\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Examen.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Examen.elf
+ 
+arm-none-eabi-size   Examen.elf 
+arm-none-eabi-objdump -h -S  Examen.elf  > "Examen.list"
+   text	   data	    bss	    dec	    hex	filename
+   8620	     20	   1636	  10276	   2824	Examen.elf
+Finished building: default.size.stdout
+ 
+Finished building: Examen.list
+ 
+09:32:48 **** Incremental Build of configuration Debug for project Examen ****
+make -j12 all 
+arm-none-eabi-size   Examen.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8620	     20	   1636	  10276	   2824	Examen.elf
+Finished building: default.size.stdout
+ 
+09:33:50 **** Incremental Build of configuration Debug for project Examen ****
+make -j12 all 
+arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -DDEBUG -c -x assembler-with-cpp -MMD -MP -MF"Core/Src/asm_func.d" -MT"Core/Src/asm_func.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/asm_func.o" "../Core/Src/asm_func.S"
+arm-none-eabi-gcc -o "Examen.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\thony\Documents\Maestria\Arquitectura de Microcontroladores\Programacion\Arquitectura-de-Microcontroladores\Examen\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Examen.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Examen.elf
+ 
+arm-none-eabi-size   Examen.elf 
+arm-none-eabi-objdump -h -S  Examen.elf  > "Examen.list"
+   text	   data	    bss	    dec	    hex	filename
+   8620	     20	   1636	  10276	   2824	Examen.elf
+Finished building: default.size.stdout
+ 
+Finished building: Examen.list
+ 
+09:33:54 **** Incremental Build of configuration Debug for project Examen ****
+make -j12 all 
+arm-none-eabi-size   Examen.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8620	     20	   1636	  10276	   2824	Examen.elf
+Finished building: default.size.stdout
+ 
+09:33:58 **** Incremental Build of configuration Debug for project Examen ****
+make -j12 all 
+arm-none-eabi-size   Examen.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8620	     20	   1636	  10276	   2824	Examen.elf
+Finished building: default.size.stdout
+ 
+10:02:21 **** Incremental Build of configuration Debug for project Examen ****
+make -j12 all 
+arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -DDEBUG -c -x assembler-with-cpp -MMD -MP -MF"Core/Src/asm_func.d" -MT"Core/Src/asm_func.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/asm_func.o" "../Core/Src/asm_func.S"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Examen.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\thony\Documents\Maestria\Arquitectura de Microcontroladores\Programacion\Arquitectura-de-Microcontroladores\Examen\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Examen.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Examen.elf
+ 
+arm-none-eabi-size   Examen.elf 
+arm-none-eabi-objdump -h -S  Examen.elf  > "Examen.list"
+   text	   data	    bss	    dec	    hex	filename
+   8648	     20	   1636	  10304	   2840	Examen.elf
+Finished building: default.size.stdout
+ 
+Finished building: Examen.list
+ 
+10:03:51 **** Incremental Build of configuration Debug for project Examen ****
+make -j12 all 
+arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -DDEBUG -c -x assembler-with-cpp -MMD -MP -MF"Core/Src/asm_func.d" -MT"Core/Src/asm_func.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/asm_func.o" "../Core/Src/asm_func.S"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Examen.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\thony\Documents\Maestria\Arquitectura de Microcontroladores\Programacion\Arquitectura-de-Microcontroladores\Examen\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Examen.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Examen.elf
+ 
+arm-none-eabi-size   Examen.elf 
+arm-none-eabi-objdump -h -S  Examen.elf  > "Examen.list"
+   text	   data	    bss	    dec	    hex	filename
+   8760	     20	   1636	  10416	   28b0	Examen.elf
+Finished building: default.size.stdout
+ 
+Finished building: Examen.list
+ 
+10:04:10 **** Incremental Build of configuration Debug for project Examen ****
+make -j12 all 
+arm-none-eabi-size   Examen.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8760	     20	   1636	  10416	   28b0	Examen.elf
+Finished building: default.size.stdout
+ 
+10:13:28 **** Incremental Build of configuration Debug for project Examen ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:110:12: warning: variable 'Ciclos_ASM_SIMD' set but not used [-Wunused-but-set-variable]
+  110 |   uint32_t Ciclos_ASM_SIMD= 0;
+      |            ^~~~~~~~~~~~~~~
+../Core/Src/main.c:101:12: warning: variable 'Ciclos_ASMNORMAL' set but not used [-Wunused-but-set-variable]
+  101 |   uint32_t Ciclos_ASMNORMAL= 0;
+      |            ^~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "Examen.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\thony\Documents\Maestria\Arquitectura de Microcontroladores\Programacion\Arquitectura-de-Microcontroladores\Examen\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Examen.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Examen.elf
+ 
+arm-none-eabi-size   Examen.elf 
+arm-none-eabi-objdump -h -S  Examen.elf  > "Examen.list"
+   text	   data	    bss	    dec	    hex	filename
+   8792	     20	   1636	  10448	   28d0	Examen.elf
+Finished building: default.size.stdout
+ 
+Finished building: Examen.list
+ 
+10:13:36 **** Incremental Build of configuration Debug for project Examen ****
+make -j12 all 
+arm-none-eabi-size   Examen.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8792	     20	   1636	  10448	   28d0	Examen.elf
+Finished building: default.size.stdout
+ 

@@ -1,0 +1,69 @@
+.syntax unified
+.thumb
+.text
+
+@ Simbolos exportados --> No olvidar de colocar los nombres de las funciones aquí
+
+.global asm_promSIMD
+.global asm_medDif
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@                                EJERCICIO Diferencia media con ASM normal
+@ void asm_medDif(int8_t * e, int8_t *x, int8_t *y, uint16_t longitud);
+@ Parametros recibidos:
+@   r0: direccion de memoria resultado
+@   r1: direccion de memoria vectorX
+@   r2: direccion de memoria vectorY
+@   r3: longitud
+@
+@ Valor de retorno:
+@   NULL, solo se modifica el vectorOUT
+@
+.thumb_func
+    asm_medDif:
+    	push {r4, r5}
+    	loop1:
+    		subs r3, #1 //actualizamos indice i, la mejor forma de iterar todos los indices del Vector
+    		ldrsb r4,[r1,r3] //Cargamos a r4 el valor[i] del vectorX
+    		ldrsb r5,[r2,r3] //Cargamos a r5 el valor[i] del vectory
+			sub r4,r5            // Suma r4= r4+r5
+			asr r5, #1           // desplazamiento aritmetico a la derecha de uno es como dividir para dos
+								// En este caso no hay problema ya que son numeros sin signo
+			strb r5,[r0,r3] //Almacenamos valor[i] del vector resultado en r0[i]
+
+
+    		bne loop1
+    		pop {r4,r5}
+    	exit1:
+        	bx lr
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@                                EJERCICIO Promedio con ASM normal
+@ void asm_promSIMD(uint16_t *vectorOut,uint16_t *vectorX,uint16_t *vectorY,uint16_t longitud);
+@ Parametros recibidos:
+@   r0: direccion de memoria resultado
+@   r1: direccion de memoria vectorX
+@   r2: direccion de memoria vectorY
+@   r3: longitud
+@
+@ Valor de retorno:
+@   NULL, solo se modifica el vectorOUT
+@
+.thumb_func
+    asm_promSIMD:
+    	push {r4, r5}
+    	lsr r3,#1  //Para no acceder a una posicion de memoria invalida, divido para dos
+    	loop12:
+    		subs r3, #1 //actualizamos indice i, la mejor forma de iterar todos los indices del Vector
+    		ldr r4,[r1,r3, LSL #2] //Cargamos a r4 el valor[i] del vectorX pero con instruccion de 32 bits
+    		ldr r5,[r2,r3, LSL #2] //Cargamos a r5 el valor[i] del vectory
+			uhadd16 r5,r5,r4   //Reemplaza a las dos instrucciones de sumar y luego dividir
+			str r5,[r0,r3, LSL #2] //Almacenamos valor[i] del vector resultado en r0[i]
+
+
+    		bne loop12
+    		pop {r4,r5}
+    	exit12:
+        	bx lr
+
+

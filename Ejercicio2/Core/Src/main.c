@@ -52,7 +52,8 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART2_UART_Init(void);
 /* USER CODE BEGIN PFP */
-void productoEscalar32(uint32_t * vectorIn, uint32_t * vectorOut ,uint32_t longitud, uint32_t escalar);
+
+
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -91,65 +92,7 @@ int main(void)
   MX_GPIO_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
-  //Implementacion en C Ejercicio 2
-  /*
-  uint32_t escalar= 2;
-  uint32_t vectorSalida[tamano]={0};
-  uint32_t vectorEntrada[tamano]={1 , 1, 1, 1, 1};
-  DWT->CYCCNT = 0;
-  uint32_t Ciclos_c= 0;
-  productoEscalar32(vectorEntrada, vectorSalida, tamano, escalar);
-  Ciclos_c= DWT->CYCCNT;
-  //Implementacion en ASM */
 
-  //Ejercicio 1
-  /*
-  uint32_t vectorIn_1[tamano]={1,2,3,4,5};
-  DWT->CYCCNT = 0;
-  uint32_t Ciclos_S1= 0; //ciclos assembler ejercicio 1
-  asm_zeros(vectorIn_1, tamano);
-  Ciclos_S1= DWT->CYCCNT;*/
-
-
-  //Ejercicio 2
-  /*
-  uint32_t escalar2= 5;
-  uint32_t vectorSalida_S[tamano]={0};
-  uint32_t vectorEntrada_S[tamano]={1 , 1, 1, 1, 1};
-  DWT->CYCCNT = 0;
-  uint32_t Ciclos_S= 0;
-  asm_productoescalar32(vectorEntrada_S, vectorSalida_S, tamano, escalar2);
-  Ciclos_S= DWT->CYCCNT;*/
-
-  //Ejercicio 3
-  /*
-  uint16_t escalar3= 2;
-  uint16_t vectorIn_3[tamano]={65531, 105, 345, 256, 2611};
-  uint16_t vectorOut_3[tamano];
-  DWT->CYCCNT = 0;
-  uint32_t Ciclos_3= 0;
-  asm_productoEscalar16(vectorIn_3, vectorOut_3, tamano, escalar3);
-  Ciclos_3= DWT->CYCCNT; */
-
-  //Ejercicio 4
-  /*
-  uint16_t escalar4= 2;
-  uint16_t vectorIn_4[tamano]={3033, 2500, 345, 256, 5000};
-  uint16_t vectorOut_4[tamano];
-  DWT->CYCCNT = 0;
-  uint32_t Ciclos_4= 0;
-  asm_productoEscalar12(vectorIn_4, vectorOut_4, tamano, escalar4);
-  Ciclos_4= DWT->CYCCNT;*/
-
-  //Ejercicio 5
-
-
-  //Ejercicio 6
-  /*
-  int32_t vectIn_6[tamano]={0xFAFAFAFA, 0xFAFAFAFC, 0xFBDF0A0A, 0xFFFF1234, 0xFFAAFFAA};
-  int16_t vecOut_6[tamano];
-  uint16_t largo= 5;
-  asm_pack32to16(vectIn_6, vecOut_6, largo);*/
 
   //Ejercicio Promedio ASM normal
 
