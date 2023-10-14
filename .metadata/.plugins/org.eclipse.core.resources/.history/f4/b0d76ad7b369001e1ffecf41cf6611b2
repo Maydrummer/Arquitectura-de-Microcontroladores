@@ -100,17 +100,6 @@ int main(void)
   productoEscalar32(vectorEntrada, vectorSalida, tamano, escalar);
   Ciclos_c= DWT->CYCCNT;
   //Implementacion en ASM
-
-  //Ejercicio 1
-  uint32_t vectorIn_1[tamano]={1,2,3,4,5};
-  DWT->CYCCNT = 0;
-  uint32_t Ciclos_S1= 0; //ciclos assembler ejercicio 1
-  asm_zeros(vectorIn_1, tamano);
-  Ciclos_S1= DWT->CYCCNT;
-
-
-  //Ejercicio 2
-
   uint32_t escalar2= 5;
   uint32_t vectorSalida_S[tamano]={0};
   uint32_t vectorEntrada_S[tamano]={1 , 1, 1, 1, 1};

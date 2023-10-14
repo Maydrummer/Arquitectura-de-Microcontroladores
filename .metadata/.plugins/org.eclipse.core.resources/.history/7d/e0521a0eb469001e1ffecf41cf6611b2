@@ -44,7 +44,7 @@
         @ push {lr} ... pop {pc}
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@ Prototipo en "C": EJERCICIO 1
+@ Prototipo en "C":
 @ void zeros (uint32_t * vector, uint32_t longitud);
 @ Parametros recibidos:
 @   r0: direccion de memoria vectorIn
@@ -57,18 +57,23 @@
     //Guardas de seguridad, compara con cero los parametros de la funcion, si es asi, se sale de la funcion
     	cbz r0, exit_productoescalar32
     	cbz r1, exit_productoescalar32
-		mov r2,#0 //Fijamos que R2 sea cero
+
     	loop1:
-    		subs r1, #1 //Decremento en uno el contador y actualiza la bandera Z, este es nuestro indice
-    		str r2,[r0,r1,LSL #2] // Guardo el valor de R2 que es cero en la direccion de memoria *(r0+(r1*4))
-    							  // Simplemente se modifica a cero el valor[i] del vectorIn
+    		subs r1, #1 //Decremento en uno el contador y actualiza la bandera Z
+    		ldr r2,[r0,r1,LSL #2] // Guardo la direccion de memoria del elemento actual en R2, R1 sera el elemento que itera
+    							  // y se decrementa en uno, pero el LSL #2 es un shift left de 2 bits, que provoca una
+    							  // multiplicacion por 4, de esta manera nos aseguramos que se itere cada 4 bytes en forma
+    							  // decreciente ; R2=*(r0+(r1*4))
+    		sub r2,r2        // r2= r2*0, se multiplica por cerol
+    		str r2,[r0,r1,LSL #2] // Almacenamos el valor en el vector In
+
     		bne loop1 //Saltamos al loop1 siempre y cuando r1 no sea cero
     	exit1:
     		bx lr
 
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@ Prototipo en "C": EJERCICIO 2
+@ Prototipo en "C":
 @   void productoEscalar32(uint32_t * vectorIn, uint32_t * vectorOut ,uint32_t longitud, uint32_t escalar)
 @
 @ Parametros recibidos:
@@ -89,7 +94,7 @@
 
     	push {r4}
     	loop_productoescalar32:
-    		subs r2, #1 //Decremento en uno el contador y actualiza la bandera Z, este es nuestro indice
+    		subs r2, #1 //Decremento en uno el contador y actualiza la bandera Z
     		ldr r4,[r0,r2,LSL #2] // Guardo la direccion de memoria del elemento actual en R4, R2 sera el elemento que itera
     							  // y se decrementa en uno, pero el LSL #2 es un shift left de 2 bits, que provoca una
     							  // multiplicacion por 4, de esta manera nos aseguramos que se itere cada 4 bytes en forma

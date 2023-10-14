@@ -57,7 +57,7 @@
     //Guardas de seguridad, compara con cero los parametros de la funcion, si es asi, se sale de la funcion
     	cbz r0, exit_productoescalar32
     	cbz r1, exit_productoescalar32
-		mov r2,#0 //Fijamos que R2 sea cero
+		move r2,#0 //Fijamos que R2 sea cero
     	loop1:
     		subs r1, #1 //Decremento en uno el contador y actualiza la bandera Z, este es nuestro indice
     		str r2,[r0,r1,LSL #2] // Guardo el valor de R2 que es cero en la direccion de memoria *(r0+(r1*4))

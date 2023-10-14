@@ -102,11 +102,8 @@ int main(void)
   //Implementacion en ASM
 
   //Ejercicio 1
-  uint32_t vectorIn_1[tamano]={1,2,3,4,5};
-  DWT->CYCCNT = 0;
-  uint32_t Ciclos_S1= 0; //ciclos assembler ejercicio 1
-  asm_zeros(vectorIn_1, tamano);
-  Ciclos_S1= DWT->CYCCNT;
+
+
 
 
   //Ejercicio 2

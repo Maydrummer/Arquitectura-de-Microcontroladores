@@ -351,6 +351,130 @@ Por ejemplo, si la Excepción #1 (de menor prioridad) ocurre unos ciclos antes q
 
 ![Late arrival](./figures/late.png)
 
+## 18.- ¿Qué es el systick? ¿Por qué puede afirmarse que su implementación favorece la portabilidad de los sistemas operativos embebidos?
 
-## 18.- ¿Qué funciones cumple la unidad de protección de memoria (MPU)?
+El SysTick es un temporizador de 24 bits incorporado en el núcleo de los microcontroladores que utilizan la arquitectura ARM Cortex-M. Al estar integrado en el núcleo del microprocesador, su funcionalidad y características están estandarizadas y disponibles en cualquier microcontrolador que implemente un núcleo ARM. Esta estandarización favorece la portabilidad de sistemas operativos y programas que hacen uso del SysTick, ya que los desarrolladores pueden confiar en su presencia y comportamiento consistentes en cualquier dispositivo que utilice un núcleo ARM.
+
+Además, la uniformidad en la implementación del SysTick en microcontroladores ARM permite que los sistemas operativos y aplicaciones que lo utilizan puedan escribir código que funcione de manera similar en diferentes dispositivos. Esto simplifica el proceso de desarrollo y adaptación del software para diversas plataformas, lo que a su vez fomenta la portabilidad y flexibilidad en la elección de hardware para proyectos embebidos.
+
+## 19.- ¿Qué funciones cumple la unidad de protección de memoria (MPU)?
 Permite controlar y restringir el acceso a regiones específicas de memoria en un sistema embebido. Su función principal es garantizar la seguridad y protección de las áreas de memoria, lo que contribuye a la seguridad del sistema y ayuda a prevenir accesos no autorizados o errores de software.
+
+## 20.- ¿Cuántas regiones pueden configurarse como máximo? ¿Qué ocurre en caso de haber solapamientos de las regiones? ¿Qué ocurre con las zonas de memoria no cubiertas por las regiones definidas?
+- Se pueden gestionar hasta ocho regiones de memoria.
+- En el caso de que se acceda a regiones no cubiertas, se desencadena dos tipos de exepciones: HardDefault y MemManege siempre y cuando esta ultima sea habilitada.
+
+## 21.- ¿Para qué se suele utilizar la excepción PendSV? ¿Cómo se relaciona su uso con el resto de las excepciones? Dé un ejemplo
+
+La excepción PendSV (Pendable Supervisor Call) en los microcontroladores Cortex-M se utiliza principalmente en sistemas operativos en tiempo real (RTOS) para tareas de planificación y cambio de contexto. Su uso está relacionado con la gestión y coordinación de tareas en un sistema multitarea.
+
+**Ejemplo:**
+- La tarea A se ejecuta en el bucle principal (while(1)).
+- Luego de ejecutar la tarea A, se establece la bandera PendSV (SCB_ICSR_PENDSVSET_Msk) para indicar que queremos cambiar a la tarea B en la próxima oportunidad.
+- La excepción PendSV se maneja en el handler PendSV_Handler, donde se lleva a cabo el cambio de contexto a la tarea B.
+- Después de ejecutar la tarea B, se volverá a generar la excepción PendSV para cambiar a la tarea A y así sucesivamente.
+
+~~~
+// Definición de las tareas
+void tareaA(void) {
+    // Código de la tarea A
+    // ...
+}
+
+void tareaB(void) {
+    // Código de la tarea B
+    // ...
+}
+
+int main(void) {
+    // Inicialización del sistema y configuración de tareas
+
+    while (1) {
+        // Ejecutar tarea A
+        tareaA();
+
+        // Generar la excepción PendSV para cambiar a la tarea B
+        // Esto indica que queremos cambiar a la tarea B en la próxima oportunidad
+        SCB->ICSR |= SCB_ICSR_PENDSVSET_Msk;
+
+        // Esperar que se maneje PendSV y se realice el cambio de contexto
+    }
+}
+
+// Handler de la excepción PendSV
+void PendSV_Handler(void) {
+    // Cambiar de contexto a la tarea B
+    // Este es un lugar adecuado para realizar el cambio de contexto entre tareas
+    // Por ejemplo, guardar el estado de la tarea actual y restaurar el estado de la tarea B
+    // También puede actualizar el puntero de pila y otros registros relevantes
+
+    // Llamar a la tarea B
+    tareaB();
+
+    // Al finalizar la tarea B, volverá a generarse una excepción PendSV para cambiar a la tarea A
+}
+~~~
+
+## 22.- ¿Para qué se suele utilizar la excepción SVC? Expliquelo dentro de un marco de un sistema operativo embebido.
+
+SVC es una excepcion tipo 11 y tiene un nivel de prioridad programable.
+Esta excepcion es disparada por la instruccion SVC. 
+
+La excepción SVC (Supervisor Call) en los microcontroladores Cortex-M es una interrupción generada por software que permite realizar llamadas al supervisor o al sistema operativo. Es una forma de cambiar de contexto y transferir el control del programa a una rutina especial de servicio del sistema (también conocida como "handler") para ejecutar operaciones privilegiadas.
+
+En un contexto de sistemas operativos en tiempo real (RTOS) o sistemas embebidos, SVC se utiliza para solicitar servicios del sistema operativo o para realizar operaciones que requieren privilegios de supervisor. Estas operaciones pueden incluir operaciones de E/S, asignación de memoria, cambios de contexto y otros servicios del sistema.
+
+# ISA
+
+## 1.- ¿Qué son los sufijos y para qué se los utiliza? Dé un ejemplo
+En ARM algunas instrucciones pueden tener un su sintaxis un sufijo:
+- Puede actualizar el registro APSR.
+- Puede ser utilizado para la ejecucion de instrucciones condicionales.
+- Seleccionar el uso de instrucciones de 16 bits y 32 bits.
+![Sufijos](./figures/sufix.png )
+
+## 2.- ¿Para qué se utiliza el sufijo ‘s’? Dé un ejemplo
+Se utiliza para actualizar el registro APSR.
+**Ejemplo:**
+~~~
+MOVS R2,R1 ; //Mover R1 dentro de R2 y actualizar el APSR
+MOV R2,R1 ; //Mover R1 dentro de R2
+~~~
+
+## 3.-¿Qué utilidad tiene la implementación de instrucciones de aritmética saturada? Dé un ejemplo con operaciones con datos de 8 bits.
+Para limitar el valor maximo y minimo de una senal. En senales es muy utilizado para prevenir el overflow.
+
+**Ejemplo:**
+
+En este ejemplo, se esta limitando a los valores de R2 a un rango de o a 255, ya que es una operacion no signada para un dato de 8 bits. En R4 se va a almacenar los valores de R2 saturados.
+~~~
+ussat r4, #8, r2
+~~~
+
+## 4.- Describa brevemente la interfaz entre assembler y C ¿Cómo se reciben los argumentos de las funciones? ¿Cómo se devuelve el resultado? ¿Qué registros deben guardarse en la pila antes de ser modificados?
+
+Se necesita de un archivo con extension tipo '.S' donde se van a desarrollar las funciones en codigo assembly.
+
+Las funciones pueden recibir hasta 4 parametros y su prototipo se lo ve de la siguiente forma:
+~~~
+myFunc (arg0, arg1, arg2, arg3)
+~~~
+
+El resultado es devuelto en el registro R0.
+
+Los registros R0,R1,R2,R3 se guardan automaticamente en el stack de memoria, por lo tanto a partir del registro R4-r12, se debe realizar un PUSH para guardar su contenido.
+
+## 5.- ¿Qué es una instrucción SIMD? ¿En qué se aplican y que ventajas reporta su uso? Dé un ejemplo.
+SIMD, que significa "Single Instruction, Multiple Data" (Instrucción Única, Múltiples Datos), es una técnica utilizada en arquitecturas de computadoras para procesar varios elementos de datos en paralelo utilizando una sola instrucción. Es especialmente útil en el procesamiento de datos que pueden ser procesados simultáneamente, como arreglos de datos numéricos.
+
+**Ejemplo:**
+~~~
+ldr r1, paquete_A1_A0
+ldr r2, paquete_B1_B0
+sadd16 r0, r1, r2
+~~~
+
+<p align="center">
+  <img src="./figures/simd.png" alt="SIMD">
+</p>
+
